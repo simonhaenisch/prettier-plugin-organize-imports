@@ -39,10 +39,10 @@ class ServiceHost {
 	 * @param {string} content file content
 	 */
 	constructor(name, content) {
-		const tsconfig = ts.findConfigFile(__dirname, ts.sys.fileExists);
+		const tsconfig = ts.findConfigFile(name, ts.sys.fileExists);
 
 		const compilerOptions = tsconfig
-			? ts.convertCompilerOptionsFromJson(ts.readConfigFile(tsconfig, ts.sys.readFile).config.compilerOptions)
+			? ts.convertCompilerOptionsFromJson(ts.readConfigFile(tsconfig, ts.sys.readFile).config.compilerOptions).options
 			: ts.getDefaultCompilerOptions();
 
 		this.name = name;
