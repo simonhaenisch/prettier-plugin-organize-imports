@@ -1,13 +1,13 @@
 {
-  "name": "prettier-plugin-sort-typescript-imports",
+  "name": "prettier-plugin-organize-imports",
   "version": "1.0.0",
-  "description": "Make prettier sort your imports by using the organizeImports feature of the TypeScript language service API.",
+  "description": "Make prettier organize your imports using the TypeScript language service API.",
   "keywords": [
     "prettier",
     "prettier-plugin",
     "typescript",
     "imports",
-    "sort-imports"
+    "organize-imports"
   ],
   "main": "index.js",
   "scripts": {
@@ -16,8 +16,8 @@
   },
   "author": "Simon Haenisch (https://github.com/simonhaenisch)",
   "license": "MIT",
-  "repository": "simonhaenisch/prettier-plugin-sort-typescript-imports",
-  "homepage": "https://github.com/simonhaenisch/prettier-plugin-sort-typescript-imports#readme",
+  "repository": "simonhaenisch/prettier-plugin-organize-imports",
+  "homepage": "https://github.com/simonhaenisch/prettier-plugin-organize-imports#readme",
   "peerDependencies": {
     "prettier": "^1.10",
     "typescript": "^3.7"
