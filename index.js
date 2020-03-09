@@ -12,9 +12,9 @@ const organizeImports = (text, options) => {
 
 	const languageService = ts.createLanguageService(new ServiceHost(fileName, text));
 
-	const fileChanges = languageService.organizeImports({ type: 'file', fileName }, {});
+	const fileChanges = languageService.organizeImports({ type: 'file', fileName }, {})[0];
 
-	return applyChanges(text, fileChanges[0].textChanges);
+	return fileChanges ? applyChanges(text, fileChanges.textChanges) : text;
 };
 
 /**
