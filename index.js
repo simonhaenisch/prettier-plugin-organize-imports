@@ -76,6 +76,8 @@ class ServiceHost {
 exports.parsers = {
 	typescript: {
 		...typescriptParsers.typescript,
-		preprocess: organizeImports,
+		preprocess: typescriptParsers.typescript.preprocess
+			? (text, options) => organizeImports(typescriptParsers.typescript.preprocess(text, options), options)
+			: organizeImports,
 	},
 };
