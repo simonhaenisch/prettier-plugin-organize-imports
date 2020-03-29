@@ -19,8 +19,8 @@
   "repository": "simonhaenisch/prettier-plugin-organize-imports",
   "homepage": "https://github.com/simonhaenisch/prettier-plugin-organize-imports#readme",
   "peerDependencies": {
-    "prettier": "^1.10",
-    "typescript": "^3.7"
+    "prettier": ">=1.10",
+    "typescript": ">=2.8.2"
   },
   "devDependencies": {
     "ava": "3.5.0",
