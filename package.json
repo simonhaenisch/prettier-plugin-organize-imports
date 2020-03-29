@@ -23,16 +23,14 @@
     "typescript": ">=2.8.2"
   },
   "devDependencies": {
-    "ava": "3.5.0",
-    "prettier": "1.19.1",
+    "ava": "3.5.1",
+    "prettier": "2.0.2",
     "typescript": "3.8.3"
   },
   "prettier": {
     "printWidth": 120,
     "singleQuote": true,
-    "tabWidth": 2,
     "trailingComma": "all",
-    "useTabs": true,
-    "bracketSpacing": true
+    "useTabs": true
   }
 }
