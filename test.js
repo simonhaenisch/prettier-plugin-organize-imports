@@ -21,6 +21,36 @@ test('sorts imports', t => {
 	t.is(formattedCode.split('\n')[0], 'import { bar, foo } from "foobar";');
 });
 
+test('removes partial unused imports', t => {
+	const code = `
+		import { foo, bar, baz } from "foobar";
+
+		const foobar = foo + baz
+	`;
+
+	const formattedCode = prettify(code);
+
+	t.is(formattedCode.split('\n')[0], 'import { baz, foo } from "foobar";');
+});
+
+test('works with 3+ named imports', t => {
+	const code = `
+		import {
+			foo,
+			bar,
+			baz,
+		} from "foobar";
+
+		foo;
+		bar;
+		baz;
+	`;
+
+	const formattedCode = prettify(code);
+
+	t.is(formattedCode.split('\n')[0], 'import { bar, baz, foo } from "foobar";');
+});
+
 test('removes unused imports', t => {
 	const code = 'import { foo } from "foobar"';
 
