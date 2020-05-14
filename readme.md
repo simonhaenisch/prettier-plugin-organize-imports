@@ -1,3 +1,5 @@
+![Tests](https://github.com/simonhaenisch/prettier-plugin-organize-imports/workflows/Tests/badge.svg)
+
 # Prettier Plugin: Organize Imports
 
 A plugin that makes Prettier organize your imports (i. e. sort and remove unused imports) using the `organizeImports` feature of the TypeScript language service API. This is the same as using the "Organize Imports" action in VS Code.
