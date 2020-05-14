@@ -9,7 +9,7 @@ const prettier = require('prettier');
 const prettify = (code, options) =>
 	prettier.format(code, { filepath: 'file.ts', parser: 'typescript', plugins: ['.'], ...options });
 
-test('sorts imports', t => {
+test('sorts imports', (t) => {
 	const code = `
 		import { foo, bar } from "foobar"
 
@@ -21,7 +21,7 @@ test('sorts imports', t => {
 	t.is(formattedCode.split('\n')[0], 'import { bar, foo } from "foobar";');
 });
 
-test('removes partial unused imports', t => {
+test('removes partial unused imports', (t) => {
 	const code = `
 		import { foo, bar, baz } from "foobar";
 
@@ -33,7 +33,7 @@ test('removes partial unused imports', t => {
 	t.is(formattedCode.split('\n')[0], 'import { baz, foo } from "foobar";');
 });
 
-test('works with 3+ named imports', t => {
+test('works with 3+ named imports', (t) => {
 	const code = `
 		import {
 			foo,
@@ -51,7 +51,7 @@ test('works with 3+ named imports', t => {
 	t.is(formattedCode.split('\n')[0], 'import { bar, baz, foo } from "foobar";');
 });
 
-test('removes unused imports', t => {
+test('removes unused imports', (t) => {
 	const code = 'import { foo } from "foobar"';
 
 	const formattedCode = prettify(code);
@@ -59,7 +59,7 @@ test('removes unused imports', t => {
 	t.is(formattedCode, '');
 });
 
-test('works without a filepath', t => {
+test('works without a filepath', (t) => {
 	const code = `
 		import { foo, bar } from "foobar"
 

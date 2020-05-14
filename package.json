@@ -27,6 +27,9 @@
     "prettier": "2.0.5",
     "typescript": "3.9.2"
   },
+  "dependencies": {
+    "ts-morph": "^7.0.3"
+  },
   "prettier": {
     "printWidth": 120,
     "singleQuote": true,

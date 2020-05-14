@@ -1,5 +1,14 @@
 const { parsers: typescriptParsers } = require('prettier/parser-typescript');
 const ts = require('typescript');
+const { getCompilerOptionsFromTsConfig, Project } = require('ts-morph');
+
+const getCompilerOptions = (fileName) => {
+	const tsconfig = ts.findConfigFile(fileName, ts.sys.fileExists);
+
+	if (tsconfig) {
+		return getCompilerOptionsFromTsConfig(tsconfig);
+	}
+};
 
 /**
  * Organize the imports using the `organizeImports` feature of the TypeScript language service API.
@@ -10,68 +19,18 @@ const ts = require('typescript');
 const organizeImports = (text, options) => {
 	const fileName = options.filepath || 'file.ts';
 
-	const languageService = ts.createLanguageService(new ServiceHost(fileName, text));
+	const compilerOptions = getCompilerOptions(fileName);
 
-	const fileChanges = languageService.organizeImports({ type: 'file', fileName }, {})[0];
-
-	return fileChanges ? applyChanges(text, fileChanges.textChanges) : text;
+	const project = new Project({
+		compilerOptions,
+		useInMemoryFileSystem: true,
+	});
+	const fs = project.getFileSystem();
+	const sourceFile = project.createSourceFile(fileName, text);
+	sourceFile.organizeImports();
+	sourceFile.saveSync();
+	return fs.readFileSync(fileName);
 };
-
-/**
- * Apply the given set of changes to the text input.
- *
- * @param {string} input
- * @param {ts.TextChange[]} changes set of text changes
- */
-const applyChanges = (input, changes) =>
-	changes.reduceRight((text, change) => {
-		const head = text.slice(0, change.span.start);
-		const tail = text.slice(change.span.start + change.span.length);
-
-		return `${head}${change.newText}${tail}`;
-	}, input);
-
-class ServiceHost {
-	/**
-	 * Create a service host instance.
-	 *
-	 * @param {string} name path to file
-	 * @param {string} content file content
-	 */
-	constructor(name, content) {
-		const tsconfig = ts.findConfigFile(name, ts.sys.fileExists);
-
-		const compilerOptions = tsconfig
-			? ts.convertCompilerOptionsFromJson(ts.readConfigFile(tsconfig, ts.sys.readFile).config.compilerOptions).options
-			: ts.getDefaultCompilerOptions();
-
-		this.name = name;
-		this.content = content;
-		this.options = compilerOptions;
-
-		this.getDefaultLibFileName = ts.getDefaultLibFileName;
-	}
-
-	getCurrentDirectory() {
-		return process.cwd();
-	}
-
-	getCompilationSettings() {
-		return this.options;
-	}
-
-	getScriptFileNames() {
-		return [this.name];
-	}
-
-	getScriptVersion() {
-		return ts.version;
-	}
-
-	getScriptSnapshot() {
-		return ts.ScriptSnapshot.fromString(this.content);
-	}
-}
 
 exports.parsers = {
 	typescript: {
