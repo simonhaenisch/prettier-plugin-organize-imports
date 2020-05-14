@@ -23,9 +23,9 @@
     "typescript": ">=2.8.2"
   },
   "devDependencies": {
-    "ava": "3.5.1",
-    "prettier": "2.0.2",
-    "typescript": "3.8.3"
+    "ava": "3.8.2",
+    "prettier": "2.0.5",
+    "typescript": "3.9.2"
   },
   "prettier": {
     "printWidth": 120,

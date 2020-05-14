@@ -12,7 +12,14 @@ const organizeImports = (text, options) => {
 
 	const languageService = ts.createLanguageService(new ServiceHost(fileName, text));
 
-	const fileChanges = languageService.organizeImports({ type: 'file', fileName }, {})[0];
+	const fileChanges = languageService.organizeImports(
+		{ type: 'file', fileName },
+		/**
+		 * @todo remove one Typescript bug has been resolved
+		 * @see https://github.com/microsoft/TypeScript/issues/38548
+		 */
+		{ newLineCharacter: ts.sys.newLine },
+	)[0];
 
 	return fileChanges ? applyChanges(text, fileChanges.textChanges) : text;
 };
@@ -50,6 +57,10 @@ class ServiceHost {
 		this.options = compilerOptions;
 
 		this.getDefaultLibFileName = ts.getDefaultLibFileName;
+	}
+
+	getNewLine() {
+		return '\n';
 	}
 
 	getCurrentDirectory() {
