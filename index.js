@@ -8,6 +8,8 @@ const ts = require('typescript');
  * @param {import('prettier').Options} options
  */
 const organizeImports = (text, options) => {
+	if (text.includes('// organize-imports-ignore')) return text;
+
 	const fileName = options.filepath || 'file.ts';
 
 	const languageService = ts.createLanguageService(new ServiceHost(fileName, text));
