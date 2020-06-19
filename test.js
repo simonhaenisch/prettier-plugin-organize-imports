@@ -68,3 +68,16 @@ test('works without a filepath', (t) => {
 
 	t.is(formattedCode.split('\n')[0], 'import { bar, foo } from "foobar";');
 });
+
+test('files with `// organize-imports-ignore` are skipped', (t) => {
+	const code = `
+		// organize-imports-ignore
+		import { foo, bar } from "foobar"
+
+		export const foobar = foo + bar
+	`;
+
+	const formattedCode = prettify(code);
+
+	t.is(formattedCode.split('\n')[1], 'import { foo, bar } from "foobar";');
+});
