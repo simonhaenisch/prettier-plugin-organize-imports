@@ -8,7 +8,9 @@ const ts = require('typescript');
  * @param {import('prettier').Options} options
  */
 const organizeImports = (text, options) => {
-	if (text.includes('// organize-imports-ignore')) return text;
+	if (text.includes('// organize-imports-ignore') || text.includes('// tslint:disable:ordered-imports') {
+		return text;
+	}
 
 	const fileName = options.filepath || 'file.ts';
 

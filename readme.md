@@ -16,7 +16,7 @@ _`prettier` and `typescript` are peer dependencies, so make sure you have those 
 
 The plugin will be loaded by Prettier automatically. No configuration needed.
 
-Files containing the substring `// organize-imports-ignore` are skipped.
+Files containing the substring `// organize-imports-ignore` or `// tslint:disable:ordered-imports` are skipped.
 
 ## License
 
