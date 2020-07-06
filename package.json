@@ -14,6 +14,9 @@
     "test": "ava",
     "prepublishOnly": "npm test"
   },
+  "files": [
+    "index.js"
+  ],
   "author": "Simon Haenisch (https://github.com/simonhaenisch)",
   "license": "MIT",
   "repository": "simonhaenisch/prettier-plugin-organize-imports",
@@ -31,6 +34,16 @@
     "printWidth": 120,
     "singleQuote": true,
     "trailingComma": "all",
-    "useTabs": true
+    "useTabs": true,
+    "overrides": [
+      {
+        "files": [
+          "package.json"
+        ],
+        "options": {
+          "useTabs": false
+        }
+      }
+    ]
   }
 }
