@@ -81,3 +81,15 @@ test('files with `// organize-imports-ignore` are skipped', (t) => {
 
 	t.is(formattedCode.split('\n')[1], 'import { foo, bar } from "foobar";');
 });
+
+test('maintain existing comments', (t) => {
+	const code = `    
+	// comment on top of line 1
+	import { foo, bar } from "foobar";
+	// comment on top of line 2
+	import baz from "baz";`;
+
+	const formattedCode = prettify(code);
+
+	t.is(code.split('\n').map(l => l.trim()).join('\n'), formattedCode)
+})
