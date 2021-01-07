@@ -4,17 +4,18 @@ on: push
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-
     strategy:
       matrix:
-        node-version: [10.x, 12.x]
+        os: [macos-latest, windows-latest, ubuntu-latest]
+        node: [10, 12, 14]
+
+    runs-on: {{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node }}
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ matrix.node }}
       - run: npm install
       - run: npm test
