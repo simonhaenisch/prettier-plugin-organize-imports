@@ -1,6 +1,9 @@
+// @ts-check
+
 const { parsers: babelParsers } = require('prettier/parser-babel');
 const { parsers: typescriptParsers } = require('prettier/parser-typescript');
 const ts = require('typescript');
+const { dirname } = require('path');
 
 /**
  * Organize the imports using the `organizeImports` feature of the TypeScript language service API.
@@ -20,10 +23,11 @@ const organizeImports = (text, options) => {
 	const fileChanges = languageService.organizeImports(
 		{ type: 'file', fileName },
 		/**
-		 * @todo remove one Typescript bug has been resolved
+		 * @todo remove once Typescript bug has been resolved
 		 * @see https://github.com/microsoft/TypeScript/issues/38548
 		 */
 		{ newLineCharacter: ts.sys.newLine },
+		{},
 	)[0];
 
 	return fileChanges ? applyChanges(text, fileChanges.textChanges) : text;
@@ -33,7 +37,7 @@ const organizeImports = (text, options) => {
  * Apply the given set of changes to the text input.
  *
  * @param {string} input
- * @param {ts.TextChange[]} changes set of text changes
+ * @param {readonly ts.TextChange[]} changes set of text changes
  */
 const applyChanges = (input, changes) =>
 	changes.reduceRight((text, change) => {
@@ -54,7 +58,8 @@ class ServiceHost {
 		const tsconfig = ts.findConfigFile(name, ts.sys.fileExists);
 
 		const compilerOptions = tsconfig
-			? ts.convertCompilerOptionsFromJson(ts.readConfigFile(tsconfig, ts.sys.readFile).config.compilerOptions).options
+			? ts.parseJsonConfigFileContent(ts.readConfigFile(tsconfig, ts.sys.readFile).config, ts.sys, dirname(tsconfig))
+					.options
 			: ts.getDefaultCompilerOptions();
 
 		compilerOptions.allowJs = true;
@@ -67,7 +72,7 @@ class ServiceHost {
 	}
 
 	getNewLine() {
-		return '\n';
+		return ts.sys.newLine;
 	}
 
 	getCurrentDirectory() {
@@ -99,11 +104,11 @@ class ServiceHost {
 const withOrganizeImportsPreprocess = (parser) => {
 	return {
 		...parser,
-		preprocess: parser.preprocess 
-			? (text, options) => organizeImports(parser.preprocess(text, options), options) 
+		preprocess: parser.preprocess
+			? (text, options) => organizeImports(parser.preprocess(text, options), options)
 			: organizeImports,
-	}
-}
+	};
+};
 
 exports.parsers = {
 	babel: withOrganizeImportsPreprocess(babelParsers.babel),
