@@ -107,5 +107,6 @@ const withOrganizeImportsPreprocess = (parser) => {
 
 exports.parsers = {
 	babel: withOrganizeImportsPreprocess(babelParsers.babel),
+	'babel-ts': withOrganizeImportsPreprocess(babelParsers['babel-ts']),
 	typescript: withOrganizeImportsPreprocess(typescriptParsers.typescript),
 };
