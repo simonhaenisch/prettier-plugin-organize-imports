@@ -2,7 +2,6 @@ const test = require('ava');
 const prettier = require('prettier');
 
 /**
- *
  * @param {string} code
  * @param {prettier.Options} options
  */
@@ -10,79 +9,92 @@ const prettify = (code, options) => prettier.format(code, { plugins: ['.'], file
 
 const prettierOptions = [{ parser: 'babel' }, { parser: 'babel-ts' }, { parser: 'typescript' }];
 
-prettierOptions.forEach((options) => {
-	const prefixTitle = (title) => `[${options.parser}] ${title}`;
+/**
+ * @param {prettier.Options['parser']} parser
+ */
+const getMacro = (parser) => {
+	/**
+	 *
+	 * @param {test.Assertions} t
+	 * @param {string} input
+	 * @param {string} expected
+	 * @param {object} [options]
+	 * @param {prettier.Options} [options.options]
+	 * @param {(res: string) => string} [options.transformer]
+	 */
+	function macro(t, input, expected, { options = {}, transformer = (res) => res.split('\n')[0] } = {}) {
+		const formattedCode = prettify(input, { parser, ...options });
 
-	test(prefixTitle('sorts imports'), (t) => {
-		const code = `
-			import { foo, bar } from "foobar"
-	
-			export const foobar = foo + bar
-		`;
+		t.is(transformer(formattedCode), expected);
+	}
 
-		const formattedCode = prettify(code, options);
+	macro.title = (title) => `[${parser}] ${title}`;
 
-		t.is(formattedCode.split('\n')[0], 'import { bar, foo } from "foobar";');
-	});
+	return macro;
+};
 
-	test(prefixTitle('removes partial unused imports'), (t) => {
-		const code = `
-			import { foo, bar, baz } from "foobar";
-	
-			const foobar = foo + baz
-		`;
+const macros = [getMacro('typescript'), getMacro('babel'), getMacro('babel-ts')];
 
-		const formattedCode = prettify(code, options);
+test(
+	'sorts imports',
+	macros,
+	`
+		import { foo, bar } from "foobar"
 
-		t.is(formattedCode.split('\n')[0], 'import { baz, foo } from "foobar";');
-	});
+		export const foobar = foo + bar
+	`,
+	'import { bar, foo } from "foobar";',
+);
 
-	test(prefixTitle('removes completely unused imports'), (t) => {
-		const code = 'import { foo } from "foobar"';
+test(
+	'removes partially unused imports',
+	macros,
+	`
+		import { foo, bar, baz } from "foobar";
 
-		const formattedCode = prettify(code, options);
+		const foobar = foo + baz
+	`,
+	'import { baz, foo } from "foobar";',
+);
 
-		t.is(formattedCode, '');
-	});
+test('removes completely unused imports', macros, 'import { foo } from "foobar"', '');
 
-	test(prefixTitle('works with multi-line imports'), (t) => {
-		const code = `
-			import {
-				foo,
-				bar,
-				baz,
-			} from "foobar";
-	
-			console.log({ foo, bar, baz });
-		`;
+test(
+	'works with multi-line imports',
+	macros,
+	`
+		import {
+			foo,
+			bar,
+			baz,
+		} from "foobar";
 
-		const formattedCode = prettify(code, options);
+		console.log({ foo, bar, baz });
+	`,
+	'import { bar, baz, foo } from "foobar";',
+);
 
-		t.is(formattedCode.split('\n')[0], 'import { bar, baz, foo } from "foobar";');
-	});
+test(
+	'works without a filepath',
+	macros,
+	`
+		import { foo, bar } from "foobar"
 
-	test(prefixTitle('works without a filepath'), (t) => {
-		const code = `
-			import { foo, bar } from "foobar"
-	
-			export const foobar = foo + bar
-		`;
+		export const foobar = foo + bar
+	`,
+	'import { bar, foo } from "foobar";',
+	{ options: { filepath: undefined } },
+);
 
-		const formattedCode = prettify(code, { ...options, filepath: undefined });
+test(
+	'files with `// organize-imports-ignore` are skipped',
+	macros,
+	`
+		// organize-imports-ignore
+		import { foo, bar } from "foobar"
 
-		t.is(formattedCode.split('\n')[0], 'import { bar, foo } from "foobar";');
-	});
-
-	test(prefixTitle('files with `// organize-imports-ignore` are skipped'), (t) => {
-		const code = `
-			// organize-imports-ignore
-			import { foo, bar } from "foobar"
-	
-			export const foobar = foo + bar
-		`;
-
-		const formattedCode = prettify(code, options);
-
-		t.is(formattedCode.split('\n')[1], 'import { foo, bar } from "foobar";');
-	});
-});
+		export const foobar = foo + bar
+	`,
+	'import { foo, bar } from "foobar";',
+	{ transformer: (res) => res.split('\n')[1] },
+);
