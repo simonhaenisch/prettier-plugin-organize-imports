@@ -56,6 +56,8 @@ class ServiceHost {
 			? ts.convertCompilerOptionsFromJson(ts.readConfigFile(tsconfig, ts.sys.readFile).config.compilerOptions).options
 			: ts.getDefaultCompilerOptions();
 
+		compilerOptions.allowJs = true;
+
 		this.name = name;
 		this.content = content;
 		this.options = compilerOptions;
