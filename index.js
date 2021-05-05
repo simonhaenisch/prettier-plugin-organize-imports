@@ -1,3 +1,4 @@
+const { parsers: babelParsers } = require('prettier/parser-babel');
 const { parsers: typescriptParsers } = require('prettier/parser-typescript');
 const ts = require('typescript');
 
@@ -90,11 +91,21 @@ class ServiceHost {
 	}
 }
 
-exports.parsers = {
-	typescript: {
-		...typescriptParsers.typescript,
-		preprocess: typescriptParsers.typescript.preprocess
-			? (text, options) => organizeImports(typescriptParsers.typescript.preprocess(text, options), options)
+/**
+ * Sets `organizeImports` as the given parsers preprocess step, or merges it with the existing one.
+ *
+ * @param {import('prettier').Parser} parser prettier parser
+ */
+const withOrganizeImportsPreprocess = (parser) => {
+	return {
+		...parser,
+		preprocess: parser.preprocess 
+			? (text, options) => organizeImports(parser.preprocess(text, options), options) 
 			: organizeImports,
-	},
+	}
+}
+
+exports.parsers = {
+	babel: withOrganizeImportsPreprocess(babelParsers.babel),
+	typescript: withOrganizeImportsPreprocess(typescriptParsers.typescript),
 };
