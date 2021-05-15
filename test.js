@@ -7,8 +7,6 @@ const prettier = require('prettier');
  */
 const prettify = (code, options) => prettier.format(code, { plugins: ['.'], filepath: 'file.ts', ...options });
 
-const prettierOptions = [{ parser: 'babel' }, { parser: 'babel-ts' }, { parser: 'typescript' }];
-
 /**
  * @param {prettier.Options['parser']} parser
  */
