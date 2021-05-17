@@ -22,6 +22,8 @@ Files containing the substring `// organize-imports-ignore` or `// tslint:disabl
 
 ## Changelog
 
+Version `2.1.0` adds support for Vue.js (`.vue` files).
+
 Version `2.0.0` adds support for the parsers `babel` (i. e. JavaScript) and `babel-ts` which are only available since Prettier v2 (and thus the peer dependency has received a major bump).
 
 ## Rationale

@@ -109,3 +109,17 @@ test('does not break prettier on unsupported files', (t) => {
 
 	t.is(formattedCode.split('\n')[1], `  import { defineComponent } from "vue";`);
 });
+
+test('works with TypeScript code inside Vue files', (t) => {
+	const code = `
+		<script lang="ts">
+			import  { defineComponent, compile } from 'vue';
+			console.log(compile);
+			export default defineComponent({});
+		</script>
+	`;
+
+	const formattedCode = prettify(code, { filepath: 'file.vue' });
+
+	t.is(formattedCode.split('\n')[1], `import { compile, defineComponent } from "vue";`);
+});
