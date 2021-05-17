@@ -96,3 +96,16 @@ test(
 	'import { foo, bar } from "foobar";',
 	{ transformer: (res) => res.split('\n')[1] },
 );
+
+test('does not break prettier on unsupported files', (t) => {
+	const code = `
+		<script lang="ts">
+			import  {   defineComponent   }   from 'vue';
+			export default defineComponent({})
+		</script>
+	`;
+
+	const formattedCode = prettify(code, { filepath: 'index.html' });
+
+	t.is(formattedCode.split('\n')[1], `  import { defineComponent } from "vue";`);
+});

@@ -16,21 +16,25 @@ const organizeImports = (text, options) => {
 		return text;
 	}
 
-	const fileName = options.filepath || 'file.ts';
+	try {
+		const fileName = options.filepath || 'file.ts';
 
-	const languageService = ts.createLanguageService(new ServiceHost(fileName, text));
+		const languageService = ts.createLanguageService(new ServiceHost(fileName, text));
 
-	const fileChanges = languageService.organizeImports(
-		{ type: 'file', fileName },
-		/**
-		 * @todo remove once Typescript bug has been resolved
-		 * @see https://github.com/microsoft/TypeScript/issues/38548
-		 */
-		{ newLineCharacter: ts.sys.newLine },
-		{},
-	)[0];
+		const fileChanges = languageService.organizeImports(
+			{ type: 'file', fileName },
+			/**
+			 * @todo remove once Typescript bug has been resolved
+			 * @see https://github.com/microsoft/TypeScript/issues/38548
+			 */
+			{ newLineCharacter: ts.sys.newLine },
+			{},
+		)[0];
 
-	return fileChanges ? applyChanges(text, fileChanges.textChanges) : text;
+		return fileChanges ? applyChanges(text, fileChanges.textChanges) : text;
+	} catch (error) {
+		return text;
+	}
 };
 
 /**
