@@ -123,3 +123,23 @@ test('works with TypeScript code inside Vue files', (t) => {
 
 	t.is(formattedCode.split('\n')[1], `import { compile, defineComponent } from "vue";`);
 });
+
+test('preserve new lines and comments in Vue files', (t) => {
+	const code = `<script lang="ts">
+import { defineComponent, ref } from "vue";
+
+export default defineComponent({
+  setup() {
+    // a test comment
+    const test = ref("");
+
+    return { test };
+  },
+});
+</script>
+`;
+
+	const formattedCode = prettify(code, { filepath: 'file.vue' });
+
+	t.is(formattedCode, code);
+});

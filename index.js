@@ -17,7 +17,7 @@ const organizeImports = (text, options) => {
 	}
 
 	try {
-		const fileName = !options.filepath || options.filepath.endsWith('.vue') ? 'file.ts' : options.filepath;
+		const fileName = !options.filepath || options.parentParser === 'vue' ? 'file.ts' : options.filepath;
 
 		const languageService = ts.createLanguageService(new ServiceHost(fileName, text));
 
