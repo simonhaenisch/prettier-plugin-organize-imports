@@ -61,16 +61,9 @@ class ServiceHost {
 	constructor(name, content) {
 		const tsconfig = ts.findConfigFile(name, ts.sys.fileExists);
 
-		const compilerOptions = tsconfig
-			? ts.parseJsonConfigFileContent(ts.readConfigFile(tsconfig, ts.sys.readFile).config, ts.sys, dirname(tsconfig))
-					.options
-			: ts.getDefaultCompilerOptions();
-
-		compilerOptions.allowJs = true;
-
 		this.name = name;
 		this.content = content;
-		this.options = compilerOptions;
+		this.options = getCompilerOptions(tsconfig);
 
 		this.getDefaultLibFileName = ts.getDefaultLibFileName;
 	}
@@ -99,6 +92,33 @@ class ServiceHost {
 		return ts.ScriptSnapshot.fromString(this.content);
 	}
 }
+
+/**
+ * Get the compiler options from a tsconfig path. Returns from cache if they have been read already.
+ *
+ * @param {string} tsconfig path to tsconfig
+ */
+const getCompilerOptions = (tsconfig) => {
+	if (compilerOptionsCache.has(tsconfig)) {
+		return compilerOptionsCache.get(tsconfig);
+	}
+
+	const compilerOptions = tsconfig
+		? ts.parseJsonConfigFileContent(ts.readConfigFile(tsconfig, ts.sys.readFile).config, ts.sys, dirname(tsconfig))
+				.options
+		: ts.getDefaultCompilerOptions();
+
+	compilerOptions.allowJs = true;
+
+	compilerOptionsCache.set(tsconfig, compilerOptions);
+
+	return compilerOptions;
+};
+
+/**
+ * @type {Map<string, ts.CompilerOptions>}
+ */
+const compilerOptionsCache = new Map();
 
 /**
  * Sets `organizeImports` as the given parsers preprocess step, or merges it with the existing one.
