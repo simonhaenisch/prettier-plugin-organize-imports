@@ -11,7 +11,7 @@
   ],
   "main": "index.js",
   "scripts": {
-    "test": "ava --verbose",
+    "test": "DEBUG=true ava --verbose",
     "prepublishOnly": "npm test"
   },
   "files": [

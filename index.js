@@ -1,6 +1,7 @@
 const { parsers: babelParsers } = require('prettier/parser-babel');
 const { parsers: typescriptParsers } = require('prettier/parser-typescript');
 const ts = require('typescript');
+
 const { organize } = require('./lib/organize');
 const { applyTextChanges } = require('./lib/apply-text-changes');
 
@@ -20,6 +21,10 @@ const organizeImports = (code, options) => {
 
 		return organize(code, filePath);
 	} catch (error) {
+		if (process.env.DEBUG) {
+			console.error(error);
+		}
+
 		return code;
 	}
 };

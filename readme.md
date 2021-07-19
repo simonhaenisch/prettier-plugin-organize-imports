@@ -20,6 +20,10 @@ The plugin will be loaded by Prettier automatically. No configuration needed.
 
 Files containing the substring `// organize-imports-ignore` or `// tslint:disable:ordered-imports` are skipped.
 
+### Debug Logs
+
+If something doesn't work, you can try to append your command with `DEBUG=true` which will enable this plugin to print some logs.
+
 ## Changelog
 
 Version `2.1.0` adds support for Vue.js (`.vue` files).
