@@ -12,7 +12,6 @@ const prettify = (code, options) => prettier.format(code, { plugins: ['.'], file
  */
 const getMacro = (parser) => {
 	/**
-	 *
 	 * @param {test.Assertions} t
 	 * @param {string} input
 	 * @param {string} expected
@@ -26,6 +25,9 @@ const getMacro = (parser) => {
 		t.is(transformer(formattedCode), expected);
 	}
 
+	/**
+	 * @param {string} title
+	 */
 	macro.title = (title) => `[${parser}] ${title}`;
 
 	return macro;

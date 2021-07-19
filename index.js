@@ -1,5 +1,3 @@
-// @ts-check
-
 const { parsers: babelParsers } = require('prettier/parser-babel');
 const { parsers: typescriptParsers } = require('prettier/parser-typescript');
 const ts = require('typescript');
