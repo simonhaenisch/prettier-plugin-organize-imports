@@ -15,7 +15,8 @@
     "prepublishOnly": "npm test"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "lib"
   ],
   "author": "Simon Haenisch (https://github.com/simonhaenisch)",
   "license": "MIT",
