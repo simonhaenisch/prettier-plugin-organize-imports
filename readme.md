@@ -36,9 +36,9 @@ If something doesn't work, you can try to append your command with `DEBUG=true` 
 
 ## Changelog
 
-Version `2.3.0` adds debug logs and fixes Vue.js support.
+Version `2.3.1` adds debug logs and fixes Vue.js support.
 
-Version `2.3.0` adds a compiler options cache to improve performance.
+Version `2.2.0` adds a compiler options cache to improve performance.
 
 Version `2.1.0` adds support for Vue.js (`.vue` files).
 
