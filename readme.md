@@ -20,11 +20,23 @@ The plugin will be loaded by Prettier automatically. No configuration needed.
 
 Files containing the substring `// organize-imports-ignore` or `// tslint:disable:ordered-imports` are skipped.
 
+### Vue.js
+
+**TL;DR:** Make sure that you have `@vue/component-compiler-utils` and `vue-template-compiler` installed.
+
+```
+npm i --save-dev @vue/component-compiler-utils vue-template-compiler
+```
+
+The `vue` parser of Prettier splits the SFC (single file component) into its blocks and then runs each block through their respective "child" parser, i.&nbsp;e. `typescript` for a `<script lang="ts">` block. This plugin would then preprocess the script content to organize the imports. However Prettier has a [bug](https://github.com/prettier/prettier/issues/11206) with the `preprocess` hook when called in a child parser, which causes broken code around comments and other things. Therefore some work was necessary to do the import organizing on the parent parser level already; this requires some manual parsing using the aforementioned packages. Hopefully Prettier will fix this bug soon so that this whole readme section and the extra code can be deleted and _it just works™️_ again :nerd_face:
+
 ### Debug Logs
 
 If something doesn't work, you can try to append your command with `DEBUG=true` which will enable this plugin to print some logs.
 
 ## Changelog
+
+Version `2.2.0` adds debug logs and fixes Vue.js support.
 
 Version `2.1.0` adds support for Vue.js (`.vue` files).
 

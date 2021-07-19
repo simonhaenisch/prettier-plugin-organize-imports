@@ -1,4 +1,5 @@
 const { parsers: babelParsers } = require('prettier/parser-babel');
+const { parsers: htmlParsers } = require('prettier/parser-html');
 const { parsers: typescriptParsers } = require('prettier/parser-typescript');
 const ts = require('typescript');
 
@@ -17,7 +18,35 @@ const organizeImports = (code, options) => {
 	}
 
 	try {
-		const filePath = !options.filepath || options.filepath.endsWith('.vue') ? 'file.ts' : options.filepath;
+		const filePath = options.filepath || 'file.ts';
+
+		/**
+		 * @todo remove this once Prettier has fixed the child-parser preprocessing bug
+		 * @see https://github.com/prettier/prettier/issues/11206
+		 */
+		if (options.parentParser === 'vue') {
+			return code; // we already did the preprocessing for the `vue` parent parser
+		} else if (options.parser === 'vue') {
+			const { getVueSFCScript } = require('./lib/get-vue-sfc-script');
+
+			const script = getVueSFCScript(code, filePath);
+
+			if (!script) {
+				return code;
+			}
+
+			const organized = organize(script.content, filePath + '.ts');
+
+			return applyTextChanges(code, [
+				{
+					newText: organized,
+					span: {
+						start: script.start,
+						length: script.end - script.start,
+					},
+				},
+			]);
+		}
 
 		return organize(code, filePath);
 	} catch (error) {
@@ -50,4 +79,5 @@ exports.parsers = {
 	babel: withOrganizeImportsPreprocess(babelParsers.babel),
 	'babel-ts': withOrganizeImportsPreprocess(babelParsers['babel-ts']),
 	typescript: withOrganizeImportsPreprocess(typescriptParsers.typescript),
+	vue: withOrganizeImportsPreprocess(htmlParsers.vue),
 };
