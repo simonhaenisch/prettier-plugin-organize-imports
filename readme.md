@@ -4,13 +4,13 @@
 
 > Make sure that your import statements stay consistent no matter who writes them and what their preferences are.
 
-A plugin that makes Prettier organize your imports (i. e. sort them and remove unused ones) using the `organizeImports` feature of the TypeScript language service API. This is the same as using the "Organize Imports" action in VS Code.
+A plugin that makes Prettier organize your imports (i. e. sorts, combines and removes unused ones) using the `organizeImports` feature of the TypeScript language service API. This is the same as using the "Organize Imports" action in VS Code.
 
-**Features:**
+**Features**
 
 - 💪 Supports `.js`, `.jsx`, `.ts`, `.tsx` and `.vue` files.
 - 🚀 Zero config.
-- 🤓 No more weird diffs or annoying merge conflicts because of import order in PRs.
+- 🤓 No more weird diffs or annoying merge conflicts in PRs caused by import statements.
 - 🤯 If your editor supports auto-imports, you'll stop thinking about your imports so much that you won't even care about their order anymore.
 
 ## Installation
