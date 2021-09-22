@@ -49,7 +49,9 @@ If something doesn't work, you can try to prefix your command with `DEBUG=true` 
 
 ## Changelog
 
-Version `2.3.2` fixes an issue with Vue 2 files.
+Version `2.3.4` fixes an issue with Vue 2 files.
+
+Version `2.3.3` fixes a bug where default imports were removed erroneously.
 
 Version `2.3.1` adds debug logs and fixes Vue.js support.
 
