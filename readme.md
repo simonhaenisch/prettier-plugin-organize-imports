@@ -8,6 +8,7 @@ A plugin that makes Prettier organize your imports (i. e. sorts, combines and re
 
 **Features**
 
+- 👌 Dependency-free (just peer-dependencies you probably already have).
 - 💪 Supports `.js`, `.jsx`, `.ts`, `.tsx` and `.vue` files.
 - 🚀 Zero config.
 - 🤓 No more weird diffs or annoying merge conflicts in PRs caused by import statements.
