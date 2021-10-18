@@ -48,6 +48,10 @@ The `vue` parser of Prettier splits the SFC (single file component) into its blo
 
 If something doesn't work, you can try to prefix your command with `DEBUG=true` which will enable this plugin to print some logs.
 
+## Rationale/Disclaimer
+
+This plugin acts outside of [Prettier's scope](https://prettier.io/docs/en/rationale#what-prettier-is-_not_-concerned-about) because _"Prettier only prints code. It does not transform it."_, and technically sorting is a code transformation because it changes the AST (this plugin even removes code, i. e. unused imports). In my opinion however, the import statements are not _really_ part of the code, they are merely directives that instruct the module system where to find the code (only true as long as your imports are side-effects free regarding the global scope, i. e. import order doesn't matter), comparable with `using` directives in C# or `#include` preprocessing directives in C. Therefore the practical benefits outweigh sticking with the philosophy in this case.
+
 ## Changelog
 
 Version `2.3.4` fixes an issue with Vue 2 files.
@@ -61,10 +65,6 @@ Version `2.2.0` adds a compiler options cache to improve performance.
 Version `2.1.0` adds support for Vue.js (`.vue` files).
 
 Version `2.0.0` adds support for the parsers `babel` (i. e. JavaScript) and `babel-ts` which are only available since Prettier v2 (and thus the peer dependency has received a major bump).
-
-## Rationale/Disclaimer
-
-This plugin acts outside of [Prettier's scope](https://prettier.io/docs/en/rationale#what-prettier-is-_not_-concerned-about) because _"Prettier only prints code. It does not transform it."_, and technically sorting is a code transformation because it changes the AST (this plugin even removes code, i. e. unused imports). In my opinion however, the import statements are not _really_ part of the code, they are merely directives that instruct the module system where to find the code (only true as long as your imports are side-effects free regarding the global scope, i. e. import order doesn't matter), comparable with `using` directives in C# or `#include` preprocessing directives in C. Therefore the practical benefits outweigh sticking with the philosophy in this case.
 
 ## License
 
