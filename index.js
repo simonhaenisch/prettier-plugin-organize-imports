@@ -29,23 +29,27 @@ const organizeImports = (code, options) => {
 		} else if (options.parser === 'vue') {
 			const { getVueSFCScript } = require('./lib/get-vue-sfc-script');
 
-			const script = getVueSFCScript(code, filePath);
+			const { script, scriptSetup } = getVueSFCScript(code, filePath);
 
-			if (!script) {
+			if (!script & !scriptSetup) {
 				return code;
 			}
 
-			const organized = organize(script.content, filePath + '.ts');
-
-			return applyTextChanges(code, [
-				{
-					newText: organized,
+			// We can assume that both section dont overlap.
+			// And we order them, to change the file from the end backwards
+			// so we don't have to reparse it.
+			const changes = [script, scriptSetup]
+				.filter(Boolean)
+				.sort((a, b) => a.start > b.start)
+				.map(({ content, start, end }) => ({
+					newText: organize(content, filePath + '.ts'),
 					span: {
-						start: script.start,
-						length: script.end - script.start,
+						start,
+						length: end - start,
 					},
-				},
-			]);
+				}));
+
+			return applyTextChanges(code, changes);
 		}
 
 		return organize(code, filePath);
