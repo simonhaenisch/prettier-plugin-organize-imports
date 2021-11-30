@@ -14,6 +14,10 @@ A plugin that makes Prettier organize your imports (i. e. sorts, combines and re
 - 🤓 No more weird diffs or annoying merge conflicts in PRs caused by import statements.
 - 🤯 If your editor supports auto-imports, you'll stop thinking about your imports so much that you won't even care about their order anymore.
 
+**Caveat**
+
+This plugin inherits, extends and overrides the built-in Prettier parsers for `babel`, `babel-ts`, `typescript` and `vue`, i. e., it's incompatible with other plugins that do the same... so only the last loaded plugin that exports one of those parsers will function.
+
 ## Installation
 
 ```sh
