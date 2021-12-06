@@ -133,3 +133,76 @@ export default defineComponent({
 
 	t.is(formattedCode, code);
 });
+
+test('works with Svelte component and module scripts', (t) => {
+	const code = `<script context="module">
+  import   {writable,derived} from "svelte/store";
+  const firstName = writable("John");
+	const lastName = derived(firstName, ($firstName) => $firstName + " Doe");
+</script>
+
+<script>
+  import  {tick,onMount} from "svelte";
+  onMount(() => {
+    tick().then(() => {
+      console.log("Svelte component mounted");
+    });
+  });
+</script>
+
+<main>
+  <p>
+    {$firstName} {$lastName}
+  </p>
+</main>
+{#if $firstName}
+  <p>{$firstName}</p>
+{/if}
+
+<style>
+  main {
+		display: flex;
+  }
+</style>
+`;
+
+	const formattedCode = prettify(code, { filepath: 'file.svelte' });
+
+	t.is(formattedCode.split('\n')[1], `  import { derived, writable } from "svelte/store";`);
+	t.is(formattedCode.split('\n')[7], `  import { onMount, tick } from "svelte";`);
+});
+
+test('works with Svelte Typescript component and module scripts', (t) => {
+	const code = `<script lang="ts" context="module">
+  import   {writable,derived} from "svelte/store";
+  const firstName = writable("John");
+	const lastName = derived(firstName, ($firstName) => $firstName + " Doe");
+</script>
+
+<script lang="ts">
+  import  {tick,onMount} from "svelte";
+  onMount(() => {
+    tick().then(() => {
+      console.log("Svelte component mounted");
+    });
+  });
+</script>
+
+<main>
+  <p>
+    {$firstName} {$lastName}
+  </p>
+</main>
+
+<style>
+  main {
+		display: flex;
+  }
+</style>
+`;
+
+	const formattedCode = prettify(code, { filepath: 'file.svelte' });
+
+	t.is(formattedCode.split('\n')[1], `  import { derived, writable } from "svelte/store";`);
+	t.is(formattedCode.split('\n')[7], `  import { onMount, tick } from "svelte";`);
+});

@@ -48,6 +48,17 @@ const organizeImports = (code, options) => {
 			]);
 		}
 
+		//
+		/**
+		 * quick hack to organize individual script tags. auto-removal of imports
+		 * fails because each script tag will not detect usage of imports in other
+		 * script tags or template.
+		 * @todo manually parse svelte components to preserve context.
+		 */
+		if (filePath.endsWith('svelte')) {
+			return organize(code, 'file.ts');
+		}
+
 		return organize(code, filePath);
 	} catch (error) {
 		if (process.env.DEBUG) {
@@ -74,6 +85,16 @@ const withOrganizeImportsPreprocess = (parser) => {
 			organizeImports(parser.preprocess ? parser.preprocess(code, options) : code, options),
 	};
 };
+
+// quick hack to recognize and parse svelte components.
+exports.languages = [
+	{
+		name: 'svelte',
+		parsers: ['html'],
+		extensions: ['.svelte'],
+		vscodeLanguageIds: ['svelte'],
+	},
+];
 
 exports.parsers = {
 	babel: withOrganizeImportsPreprocess(babelParsers.babel),
