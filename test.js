@@ -147,6 +147,19 @@ const d = a + b + c;
 	t.is(formattedCode.split('\n')[1], `import { a, b, c } from "x";`);
 });
 
+test('supports Vue SFCs with <script setup lang="ts">', (t) => {
+	const code = `
+<script setup lang="ts">
+import { a, c, b } from "x";
+const d : number = a + b + c;
+</script>
+	`;
+
+	const formattedCode = prettify(code, { filepath: 'file.vue' });
+
+	t.is(formattedCode.split('\n')[1], `import { a, b, c } from "x";`);
+});
+
 /**
  * It might be rare but it is allowed to use both kinds of script tag in one file:
  * https://v3.vuejs.org/api/sfc-script-setup.html#usage-alongside-normal-script
