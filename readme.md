@@ -30,6 +30,8 @@ _`prettier` and `typescript` are peer dependencies, so make sure you have those 
 
 The plugin will be loaded by Prettier automatically. No configuration needed.
 
+Note: Yarn 2 [does not yet support](https://github.com/prettier/prettier/issues/8474) automatic plugin discovery. [See the prettier documentation](https://prettier.io/docs/en/plugins.html) on plugins for alternatives to manually load them when using Yarn 2.
+
 Files containing the substring `// organize-imports-ignore` or `// tslint:disable:ordered-imports` are skipped.
 
 ### Vue.js
