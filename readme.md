@@ -54,6 +54,8 @@ This plugin acts outside of [Prettier's scope](https://prettier.io/docs/en/ratio
 
 ## Changelog
 
+Version `3.0.0` switches to a different package for Vue support, which fixes some more issues, e. g. support for setup scripts. No breaking changes otherwise.
+
 Version `2.3.4` fixes an issue with Vue 2 files.
 
 Version `2.3.3` fixes a bug where default imports were removed erroneously.
