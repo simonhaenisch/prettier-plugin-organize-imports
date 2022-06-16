@@ -1,4 +1,4 @@
-const test = require('ava');
+const test = require('ava').default;
 const prettier = require('prettier');
 
 /**
@@ -12,7 +12,7 @@ const prettify = (code, options) => prettier.format(code, { plugins: ['.'], file
  */
 const getMacro = (parser) => {
 	/**
-	 * @param {test.Assertions} t
+	 * @param {import('ava').Assertions} t
 	 * @param {string} input
 	 * @param {string} expected
 	 * @param {object} [options]
@@ -33,6 +33,9 @@ const getMacro = (parser) => {
 	return macro;
 };
 
+/**
+ * @type {import('ava').OneOrMoreMacros<[string, string] | [string, string, { options?: prettier.Options, transformer?: (res: string) => string }], unknown>}
+ */
 const macros = [getMacro('typescript'), getMacro('babel'), getMacro('babel-ts')];
 
 test(
