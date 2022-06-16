@@ -36,19 +36,13 @@ Files containing the substring `// organize-imports-ignore` or `// tslint:disabl
 
 ### Vue.js
 
-**TL;DR:** Make sure that you have either `@vue/compiler-sfc` (for Vue 3.x) or both `@vue/component-compiler-utils` and `vue-template-compiler` (for Vue 2.x) installed.
+**TL;DR:** Make sure that you have `@volar/vue-typescript` installed.
 
 ```
-npm i --save-dev @vue/compiler-sfc
+npm i --save-dev @volar/vue-typescript
 ```
 
-or
-
-```
-npm i --save-dev @vue/component-compiler-utils vue-template-compiler
-```
-
-The `vue` parser of Prettier splits the SFC (single file component) into its blocks and then runs each block through their respective "child" parser, i.&nbsp;e. `typescript` for a `<script lang="ts">` block. This plugin would then preprocess the script content to organize the imports. However Prettier has a [bug](https://github.com/prettier/prettier/issues/11206) with the `preprocess` hook when called in a child parser, which causes broken code around comments and other things. Therefore some work was necessary to do the import organizing on the parent parser level already; this requires some manual parsing using the aforementioned packages. Hopefully Prettier will fix this bug soon so that this whole readme section and the extra code can be deleted and _it just works™️_ again 🤓
+The `vue` parser of Prettier splits the SFC (single file component) into its blocks and then runs each block through their respective "child" parser, i.&nbsp;e. `typescript` for a `<script lang="ts">` block. This plugin would then preprocess the script content to organize the imports. However Prettier has a [bug](https://github.com/prettier/prettier/issues/11206) with the `preprocess` hook when called in a child parser, which causes broken code around comments and other things. Therefore some work was necessary to do the import organizing on the parent parser level already; this requires using a different language service that the above package provides. Hopefully Prettier will fix this bug soon so that this whole readme section and the extra code can be deleted and _it just works™️_ again 🤓
 
 ### Debug Logs
 

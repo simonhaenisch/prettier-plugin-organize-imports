@@ -1,4 +1,4 @@
-const test = require('ava');
+const test = require('ava').default;
 const prettier = require('prettier');
 
 /**
@@ -12,7 +12,7 @@ const prettify = (code, options) => prettier.format(code, { plugins: ['.'], file
  */
 const getMacro = (parser) => {
 	/**
-	 * @param {test.Assertions} t
+	 * @param {import('ava').Assertions} t
 	 * @param {string} input
 	 * @param {string} expected
 	 * @param {object} [options]
@@ -33,6 +33,9 @@ const getMacro = (parser) => {
 	return macro;
 };
 
+/**
+ * @type {import('ava').OneOrMoreMacros<[string, string] | [string, string, { options?: prettier.Options, transformer?: (res: string) => string }], unknown>}
+ */
 const macros = [getMacro('typescript'), getMacro('babel'), getMacro('babel-ts')];
 
 test(
@@ -111,6 +114,19 @@ test('works with TypeScript code inside Vue files', (t) => {
 	const formattedCode = prettify(code, { filepath: 'file.vue' });
 
 	t.is(formattedCode.split('\n')[1], `import { compile, defineComponent } from "vue";`);
+});
+
+test('works with Vue setup scripts', (t) => {
+	const code = `
+		<script setup lang="ts">
+			import  {defineComponent,compile} from 'vue';
+			export default defineComponent({});
+		</script>
+	`;
+
+	const formattedCode = prettify(code, { filepath: 'file.vue' });
+
+	t.is(formattedCode.split('\n')[1], `import { defineComponent } from "vue";`);
 });
 
 test('preserves new lines and comments in Vue files', (t) => {

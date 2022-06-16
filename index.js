@@ -18,37 +18,7 @@ const organizeImports = (code, options) => {
 	}
 
 	try {
-		const filePath = options.filepath || 'file.ts';
-
-		/**
-		 * @todo remove this once Prettier has fixed the child-parser preprocessing bug
-		 * @see https://github.com/prettier/prettier/issues/11206
-		 */
-		if (options.parentParser === 'vue') {
-			return code; // we already did the preprocessing for the `vue` parent parser
-		} else if (options.parser === 'vue') {
-			const { getVueSFCScript } = require('./lib/get-vue-sfc-script');
-
-			const script = getVueSFCScript(code, filePath);
-
-			if (!script) {
-				return code;
-			}
-
-			const organized = organize(script.content, filePath + '.ts');
-
-			return applyTextChanges(code, [
-				{
-					newText: organized,
-					span: {
-						start: script.start,
-						length: script.end - script.start,
-					},
-				},
-			]);
-		}
-
-		return organize(code, filePath);
+		return organize(code, options);
 	} catch (error) {
 		if (process.env.DEBUG) {
 			console.error(error);
