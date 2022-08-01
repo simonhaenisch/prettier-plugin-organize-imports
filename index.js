@@ -4,7 +4,6 @@ const { parsers: typescriptParsers } = require('prettier/parser-typescript');
 const ts = require('typescript');
 
 const { organize } = require('./lib/organize');
-const { applyTextChanges } = require('./lib/apply-text-changes');
 
 /**
  * Organize the code's imports using the `organizeImports` feature of the TypeScript language service API.
