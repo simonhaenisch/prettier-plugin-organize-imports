@@ -30,7 +30,7 @@ _`prettier` and `typescript` are peer dependencies, so make sure you have those 
 
 The plugin will be loaded by Prettier automatically. No configuration needed.
 
-_Note: Some package managers (e. g. [Yarn 2](https://github.com/prettier/prettier/issues/8474)) don't support automatic plugin discovery. Check the [Prettier documentation](https://prettier.io/docs/en/plugins.html) for alternatives to manually load plugins in that case._
+_Note: Automatic plugin discovery is not supported with some package managers (e. g. [Yarn 2](https://github.com/prettier/prettier/issues/8474)). Check the [Prettier documentation](https://prettier.io/docs/en/plugins.html) for alternatives to manually load plugins in that case._
 
 Files containing the substring `// organize-imports-ignore` or `// tslint:disable:ordered-imports` are skipped.
 
@@ -51,6 +51,8 @@ If something doesn't work, you can try to prefix your command with `DEBUG=true` 
 This plugin acts outside of [Prettier's scope](https://prettier.io/docs/en/rationale#what-prettier-is-_not_-concerned-about) because _"Prettier only prints code. It does not transform it."_, and technically sorting is a code transformation because it changes the AST (this plugin even removes code, i. e. unused imports). In my opinion however, the import statements are not _really_ part of the code, they are merely directives that instruct the module system where to find the code (only true as long as your imports are side-effects free regarding the global scope, i. e. import order doesn't matter), comparable with `using` directives in C# or `#include` preprocessing directives in C. Therefore the practical benefits outweigh sticking with the philosophy in this case.
 
 ## Changelog
+
+Version `3.0.1` bumps the `@volar/vue-typescript` version to fix more edge cases, e. g. not removing imports when a component is used via kebab-case naming. `@volar/vue-typescript` is now defined as an optional peer dependency and you'll need to install version `0.39` or later. Furthermore a fix has been added that should help support more module resolution algorithms.
 
 Version `3.0.0` switches to a different package for Vue support, which fixes some more issues, e. g. support for setup scripts. No breaking changes otherwise.
 
