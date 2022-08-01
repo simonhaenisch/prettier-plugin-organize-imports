@@ -149,3 +149,20 @@ export default defineComponent({
 
 	t.is(formattedCode, code);
 });
+
+test('does not remove imports when Vue components use kebab case', (t) => {
+	const code = `<template>
+  <div>
+    <n-divider />
+  </div>
+</template>
+
+<script setup lang="ts">
+import { NDivider } from "naive-ui";
+</script>
+`;
+
+	const formattedCode = prettify(code, { filepath: 'file.vue' });
+
+	t.is(formattedCode, code);
+});
