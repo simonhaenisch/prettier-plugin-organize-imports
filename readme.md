@@ -30,19 +30,17 @@ _`prettier` and `typescript` are peer dependencies, so make sure you have those 
 
 The plugin will be loaded by Prettier automatically. No configuration needed.
 
-Note: Yarn 2 [does not yet support](https://github.com/prettier/prettier/issues/8474) automatic plugin discovery. [See the prettier documentation](https://prettier.io/docs/en/plugins.html) on plugins for alternatives to manually load them when using Yarn 2.
+_Note: Some package managers (e. g. [Yarn 2](https://github.com/prettier/prettier/issues/8474)) don't support automatic plugin discovery. Check the [Prettier documentation](https://prettier.io/docs/en/plugins.html) for alternatives to manually load plugins in that case._
 
 Files containing the substring `// organize-imports-ignore` or `// tslint:disable:ordered-imports` are skipped.
 
 ### Vue.js
 
-**TL;DR:** Make sure that you have `@volar/vue-typescript` installed.
+Make sure that you have the optional peer dependency `@volar/vue-typescript` installed.
 
 ```
 npm i --save-dev @volar/vue-typescript
 ```
-
-The `vue` parser of Prettier splits the SFC (single file component) into its blocks and then runs each block through their respective "child" parser, i.&nbsp;e. `typescript` for a `<script lang="ts">` block. This plugin would then preprocess the script content to organize the imports. However Prettier has a [bug](https://github.com/prettier/prettier/issues/11206) with the `preprocess` hook when called in a child parser, which causes broken code around comments and other things. Therefore some work was necessary to do the import organizing on the parent parser level already; this requires using a different language service that the above package provides. Hopefully Prettier will fix this bug soon so that this whole readme section and the extra code can be deleted and _it just works™️_ again 🤓
 
 ### Debug Logs
 
@@ -56,7 +54,7 @@ This plugin acts outside of [Prettier's scope](https://prettier.io/docs/en/ratio
 
 Version `3.0.0` switches to a different package for Vue support, which fixes some more issues, e. g. support for setup scripts. No breaking changes otherwise.
 
-Version `2.3.4` fixes an issue with Vue 2 files.
+Version `2.3.4` fixes an issue with Vue v2 files.
 
 Version `2.3.3` fixes a bug where default imports were removed erroneously.
 
