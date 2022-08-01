@@ -27,11 +27,11 @@
     "typescript": ">=2.9"
   },
   "devDependencies": {
-    "@types/node": "16.9.6",
-    "@volar/vue-typescript": "0.39.0",
+    "@types/node": "18.6.3",
+    "@volar/vue-typescript": "0.39.4",
     "ava": "3.15.0",
-    "prettier": "2.4.1",
-    "typescript": "4.4.3"
+    "prettier": "2.7.1",
+    "typescript": "4.7.4"
   },
   "prettier": {
     "printWidth": 120,
