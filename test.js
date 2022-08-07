@@ -3,7 +3,7 @@ const prettier = require('prettier');
 
 /**
  * @param {string} code
- * @param {prettier.Options} options
+ * @param {prettier.Options} [options]
  */
 const prettify = (code, options) => prettier.format(code, { plugins: ['.'], filepath: 'file.ts', ...options });
 
