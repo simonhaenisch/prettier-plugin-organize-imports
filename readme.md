@@ -55,6 +55,8 @@ This plugin acts outside of [Prettier's scope](https://prettier.io/docs/en/ratio
 
 ## Changelog
 
+Version `3.0.3` fixes a performance regression introduced in `3.0.2`.
+
 Version `3.0.2` fixes a regression introduced by adding some file-system related methods to the language service host (to fix a bug), which revealed that another method's implementation was incorrect.
 
 Version `3.0.1` bumps the `@volar/vue-typescript` version to fix more edge cases, e. g. not removing imports when a component is used via kebab-case naming. `@volar/vue-typescript` is now defined as an optional peer dependency and you'll need to install version `0.39` or later. Furthermore a fix has been added that should help support more module resolution algorithms.
