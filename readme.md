@@ -45,6 +45,8 @@ Make sure that you have the optional peer dependency `@volar/vue-typescript` ins
 npm i --save-dev @volar/vue-typescript
 ```
 
+If you're using Vue.js with Pug templates, you'll also need to install `@volar/pug-language-service` as a dev dependency.
+
 ### Debug Logs
 
 If something doesn't work, you can try to prefix your command with `DEBUG=true` which will enable this plugin to print some logs.
