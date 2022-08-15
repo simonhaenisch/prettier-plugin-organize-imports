@@ -32,6 +32,17 @@ The plugin will be loaded by Prettier automatically. No configuration needed.
 
 Files containing the substring `// organize-imports-ignore` or `// tslint:disable:ordered-imports` are skipped.
 
+If you don't want destructive code actions (like removing unused imports), you can enable the option `organizeImportsSkipDestructiveCodeActions` via your Prettier config.
+
+```js
+// prettierrc.js
+
+module.exports = {
+  // ...
+  organizeImportsSkipDestructiveCodeActions: true,
+};
+```
+
 **Notes:**
 
 - Automatic plugin discovery is not supported with some package managers (e. g. [Yarn 2](https://github.com/prettier/prettier/issues/8474)). Check the [Prettier documentation](https://prettier.io/docs/en/plugins.html) for alternatives to manually load plugins in that case.
