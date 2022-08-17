@@ -166,3 +166,12 @@ import { NDivider } from "naive-ui";
 
 	t.is(formattedCode, code);
 });
+
+test('does not remove unused imports with `organizeImportsSkipDestructiveCodeActions` enabled', (t) => {
+	const code = `import { foo } from "./bar";
+`;
+
+	const formattedCode = prettify(code, { organizeImportsSkipDestructiveCodeActions: true });
+
+	t.is(formattedCode, code);
+});

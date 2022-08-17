@@ -44,9 +44,25 @@ const withOrganizeImportsPreprocess = (parser) => {
 	};
 };
 
-exports.parsers = {
-	babel: withOrganizeImportsPreprocess(babelParsers.babel),
-	'babel-ts': withOrganizeImportsPreprocess(babelParsers['babel-ts']),
-	typescript: withOrganizeImportsPreprocess(typescriptParsers.typescript),
-	vue: withOrganizeImportsPreprocess(htmlParsers.vue),
+/**
+ * @type {import('prettier').Plugin}
+ */
+const plugin = {
+	options: {
+		organizeImportsSkipDestructiveCodeActions: {
+			type: 'boolean',
+			default: false,
+			category: 'OrganizeImports',
+			description: 'Skip destructive code actions like removing unused imports.',
+			since: '2.0.0',
+		},
+	},
+	parsers: {
+		babel: withOrganizeImportsPreprocess(babelParsers.babel),
+		'babel-ts': withOrganizeImportsPreprocess(babelParsers['babel-ts']),
+		typescript: withOrganizeImportsPreprocess(typescriptParsers.typescript),
+		vue: withOrganizeImportsPreprocess(htmlParsers.vue),
+	},
 };
+
+module.exports = plugin;
