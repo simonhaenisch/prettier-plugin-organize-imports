@@ -68,6 +68,8 @@ This plugin acts outside of [Prettier's scope](https://prettier.io/docs/en/ratio
 
 ## Changelog
 
+Version `3.1.0` adds an option to skip destructive code actions like removing unused imports.
+
 Version `3.0.3` fixes a performance regression introduced in `3.0.2`.
 
 Version `3.0.2` fixes a regression introduced by adding some file-system related methods to the language service host (to fix a bug), which revealed that another method's implementation was incorrect.
