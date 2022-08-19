@@ -46,6 +46,7 @@ module.exports = {
 **Notes:**
 
 - Automatic plugin discovery is not supported with some package managers (e. g. [Yarn 2](https://github.com/prettier/prettier/issues/8474)). Check the [Prettier documentation](https://prettier.io/docs/en/plugins.html) for alternatives to manually load plugins in that case.
+- For compatibility with [ESLint](https://eslint.org/) or other linters, see ["Integrating with Linters"](https://prettier.io/docs/en/integrating-with-linters.html) in the Prettier docs. You should have any import order rules/plugins disabled.
 - React users: depending on your configuration, if you need the `React` import to stay even if it's "unused" (i.e. only needed for the JSX factory), make sure to have the `jsx` option set to `react` in your `tsconfig.json`. For more details [click here](https://www.typescriptlang.org/docs/handbook/jsx.html#basic-usage).
 
 ### Vue.js
