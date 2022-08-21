@@ -1,4 +1,4 @@
-export declare module 'prettier' {
+declare module 'prettier' {
 	interface Options {
 		organizeImportsSkipDestructiveCodeActions?: boolean;
 	}
@@ -6,3 +6,5 @@ export declare module 'prettier' {
 		organizeImportsSkipDestructiveCodeActions?: boolean;
 	}
 }
+
+export {};
