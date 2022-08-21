@@ -9,7 +9,7 @@ A plugin that makes Prettier organize your imports (i. e. sorts, combines and re
 **Features**
 
 - 👌 Dependency-free (just peer-dependencies you probably already have).
-- 💪 Supports `.js`, `.jsx`, `.ts`, `.tsx` and `.vue` files.
+- 💪 Supports `.js`, `.jsx`, `.ts`, `.tsx`, `.vue`, and `.svelte` files.
 - 🚀 Zero config.
 - 🤓 No more weird diffs or annoying merge conflicts in PRs caused by import statements.
 - 🤯 If your editor supports auto-imports, you'll stop thinking about your imports so much that you won't even care about their order anymore.
@@ -58,6 +58,16 @@ npm i --save-dev @volar/vue-typescript
 ```
 
 If you're using Vue.js with Pug templates, you'll also need to install `@volar/pug-language-service` as a dev dependency.
+
+### Svelte
+
+Make sure that you have the optional peer dependency `prettier-plugin-svelte` installed.
+
+```
+npm i --save-dev prettier-plugin-svelte
+```
+
+Note that `organizeImportsSkipDestructiveCodeActions` will be force-enabled because the plugin is currently unable to detect unused imports correctly.
 
 ### Debug Logs
 

@@ -7,7 +7,9 @@
     "prettier-plugin",
     "typescript",
     "imports",
-    "organize-imports"
+    "organize-imports",
+    "vue",
+    "svelte"
   ],
   "main": "index.js",
   "scripts": {
@@ -25,10 +27,14 @@
   "peerDependencies": {
     "@volar/vue-typescript": ">=0.39.0",
     "prettier": ">=2.0",
+    "prettier-plugin-svelte": ">=2.0",
     "typescript": ">=2.9"
   },
   "peerDependenciesMeta": {
     "@volar/vue-typescript": {
+      "optional": true
+    },
+    "prettier-plugin-svelte": {
       "optional": true
     }
   },
@@ -37,6 +43,8 @@
     "@volar/vue-typescript": "0.39.5",
     "ava": "3.15.0",
     "prettier": "2.7.1",
+    "prettier-plugin-svelte": "2.7.0",
+    "svelte": "3.49.0",
     "typescript": "4.7.4"
   },
   "prettier": {

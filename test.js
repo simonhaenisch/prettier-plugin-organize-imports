@@ -175,3 +175,26 @@ test('does not remove unused imports with `organizeImportsSkipDestructiveCodeAct
 
 	t.is(formattedCode, code);
 });
+
+test('has basic Svelte support', (t) => {
+	const code = `
+	<script lang="ts">
+		import Foo from './foo';
+		import Bar from './bar';
+	</script>
+
+	<Foo />
+	`;
+
+	const expectedCode = `<script lang="ts">
+  import Bar from "./bar";
+  import Foo from "./foo";
+</script>
+
+<Foo />
+`;
+
+	const formattedCode = prettify(code, { filepath: 'file.svelte' });
+
+	t.is(formattedCode, expectedCode);
+});
