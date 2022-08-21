@@ -1,7 +1,6 @@
 const { parsers: babelParsers } = require('prettier/parser-babel');
 const { parsers: htmlParsers } = require('prettier/parser-html');
 const { parsers: typescriptParsers } = require('prettier/parser-typescript');
-const ts = require('typescript');
 
 const { organize } = require('./lib/organize');
 
