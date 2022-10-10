@@ -16,7 +16,8 @@
   },
   "files": [
     "index.js",
-    "lib"
+    "lib",
+    "prettier.d.ts"
   ],
   "author": "Simon Haenisch (https://github.com/simonhaenisch)",
   "license": "MIT",
