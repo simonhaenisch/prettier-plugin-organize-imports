@@ -15,7 +15,7 @@ const getMacro = (parser) => {
 	 * @param {import('ava').Assertions} t
 	 * @param {string} input
 	 * @param {string} expected
-	 * @param {object} [options]
+	 * @param {object} options
 	 * @param {prettier.Options} [options.options]
 	 * @param {(res: string) => string} [options.transformer]
 	 */
