@@ -167,6 +167,21 @@ import { NDivider } from "naive-ui";
 	t.is(formattedCode, code);
 });
 
+test('works with pug templates in Vue files', (t) => {
+	const code = `<script setup lang="ts">
+import Foo from "@/components";
+</script>
+
+<template lang="pug">
+  Foo
+</template>
+`;
+
+	const formattedCode = prettify(code, { filepath: 'file.vue' });
+
+	t.is(formattedCode, code);
+});
+
 test('does not remove unused imports with `organizeImportsSkipDestructiveCodeActions` enabled', (t) => {
 	const code = `import { foo } from "./bar";
 `;
