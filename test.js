@@ -173,7 +173,7 @@ import Foo from "@/components";
 </script>
 
 <template lang="pug">
-  Foo
+Foo
 </template>
 `;
 
