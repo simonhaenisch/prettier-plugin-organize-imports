@@ -57,7 +57,7 @@ Make sure that you have the optional peer dependency `@volar/vue-typescript` ins
 npm i --save-dev @volar/vue-typescript
 ```
 
-If you're using Vue.js with Pug templates, you'll also need to install `@volar/pug-language-service` as a dev dependency.
+If you're using Vue.js with Pug templates, you'll also need to install `@volar/vue-language-plugin-pug` as a dev dependency, and configure it in `vueCompilerOptions` (see [usage](https://github.com/johnsoncodehk/volar/tree/master/vue-language-tools/vue-language-plugin-pug)).
 
 ### Debug Logs
 
