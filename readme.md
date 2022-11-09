@@ -57,7 +57,7 @@ Make sure that you have the optional peer dependency `@volar/vue-typescript` ins
 npm i --save-dev @volar/vue-typescript
 ```
 
-If you're using Vue.js with Pug templates, you'll also need to install `@volar/vue-language-plugin-pug` as a dev dependency, and configure it in `vueCompilerOptions` (see [usage](https://github.com/johnsoncodehk/volar/tree/master/vue-language-tools/vue-language-plugin-pug)).
+If you're using Vue.js with Pug templates, you'll also need to install `@volar/vue-language-plugin-pug` as a dev dependency, and configure it in `vueCompilerOptions` (see [usage](https://www.npmjs.com/package/@volar/vue-language-plugin-pug)).
 
 ### Debug Logs
 
@@ -68,6 +68,8 @@ If something doesn't work, you can try to prefix your command with `DEBUG=true` 
 This plugin acts outside of [Prettier's scope](https://prettier.io/docs/en/rationale#what-prettier-is-_not_-concerned-about) because _"Prettier only prints code. It does not transform it."_, and technically sorting is a code transformation because it changes the AST (this plugin even removes code, i. e. unused imports). In my opinion however, the import statements are not _really_ part of the code, they are merely directives that instruct the module system where to find the code (only true as long as your imports are side-effects free regarding the global scope, i. e. import order doesn't matter), comparable with `using` directives in C# or `#include` preprocessing directives in C. Therefore the practical benefits outweigh sticking with the philosophy in this case.
 
 ## Changelog
+
+Version `3.2.0` adds and fixes support for pug templates in Vue files (via `@volar/vue-language-plugin-pug`). Please be aware that you'll need to update your version of the `@volar/vue-typescript` peer dependency from `0.x` to `1.x`.
 
 Version `3.1.0` adds an option to skip destructive code actions like removing unused imports.
 
