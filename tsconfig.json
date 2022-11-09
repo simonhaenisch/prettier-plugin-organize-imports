@@ -4,5 +4,6 @@
 		"target": "es2015",
 		"checkJs": true,
 		"strict": true
-	}
+	},
+	"vueCompilerOptions": { "plugins": ["@volar/vue-language-plugin-pug"] }
 }
