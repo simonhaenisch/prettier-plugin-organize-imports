@@ -182,6 +182,32 @@ Foo
 	t.is(formattedCode, code);
 });
 
+test('has basic Svelte support', (t) => {
+	const code = `
+	<script>
+		import Foo from './Foo.svelte';
+		import Bar from './Bar.svelte';
+		import Unused from './Unused.svelte';
+	</script>
+
+	<Foo />
+	<Bar />
+	`;
+
+	const expectedCode = `<script>
+  import Bar from "./Bar.svelte";
+  import Foo from "./Foo.svelte";
+</script>
+
+<Foo />
+<Bar />
+`;
+
+	const formattedCode = prettify(code, { plugins: ['prettier-plugin-svelte', '.'], filepath: 'file.svelte' });
+
+	t.is(formattedCode, expectedCode);
+});
+
 test('does not remove unused imports with `organizeImportsSkipDestructiveCodeActions` enabled', (t) => {
 	const code = `import { foo } from "./bar";
 `;

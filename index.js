@@ -1,5 +1,6 @@
 const { parsers: babelParsers } = require('prettier/parser-babel');
 const { parsers: htmlParsers } = require('prettier/parser-html');
+const { parsers: svelteParsers } = require('prettier-plugin-svelte');
 const { parsers: typescriptParsers } = require('prettier/parser-typescript');
 
 const { organize } = require('./lib/organize');
@@ -59,6 +60,7 @@ const plugin = {
 	parsers: {
 		babel: withOrganizeImportsPreprocess(babelParsers.babel),
 		'babel-ts': withOrganizeImportsPreprocess(babelParsers['babel-ts']),
+		svelte: withOrganizeImportsPreprocess(svelteParsers.svelte),
 		typescript: withOrganizeImportsPreprocess(typescriptParsers.typescript),
 		vue: withOrganizeImportsPreprocess(htmlParsers.vue),
 	},
