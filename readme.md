@@ -69,6 +69,8 @@ This plugin acts outside of [Prettier's scope](https://prettier.io/docs/en/ratio
 
 ## Changelog
 
+Version `3.2.1` fixes the implementation of the language service host's `getCurrentDirectory` method to return the directory containing the tsconfig, rather than using `ts.sys.getCurrentDirectory` (which returns `process.cwd()`). This should prevent issues with resolving compiler plugins with Volar (which is used for Vue support).
+
 Version `3.2.0` adds and fixes support for pug templates in Vue files (via `@volar/vue-language-plugin-pug`). Please be aware that you'll need to update your version of the `@volar/vue-typescript` peer dependency from `0.x` to `1.x`.
 
 Version `3.1.0` adds an option to skip destructive code actions like removing unused imports.
