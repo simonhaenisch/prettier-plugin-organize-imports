@@ -12,7 +12,7 @@
   "main": "index.js",
   "scripts": {
     "test": "ava --verbose",
-    "prepublishOnly": "npm test"
+    "preversion": "npm test"
   },
   "files": [
     "index.js",
