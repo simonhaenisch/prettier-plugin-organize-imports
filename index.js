@@ -1,3 +1,7 @@
+/**
+ * @todo change these to their new locations (`prettier/plugins/<parser>`) with
+ * the next major release.
+ */
 const { parsers: babelParsers } = require('prettier/parser-babel');
 const { parsers: htmlParsers } = require('prettier/parser-html');
 const { parsers: typescriptParsers } = require('prettier/parser-typescript');
@@ -53,7 +57,6 @@ const plugin = {
 			default: false,
 			category: 'OrganizeImports',
 			description: 'Skip destructive code actions like removing unused imports.',
-			since: '2.0.0',
 		},
 	},
 	parsers: {

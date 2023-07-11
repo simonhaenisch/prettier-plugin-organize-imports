@@ -70,11 +70,11 @@ test(
 	{ transformer: (res) => res.split('\n')[1] },
 );
 
-test('does not remove unused imports with `organizeImportsSkipDestructiveCodeActions` enabled', (t) => {
+test('does not remove unused imports with `organizeImportsSkipDestructiveCodeActions` enabled', async (t) => {
 	const code = `import { foo } from "./bar";
 `;
 
-	const formattedCode = prettify(code, { organizeImportsSkipDestructiveCodeActions: true });
+	const formattedCode = await prettify(code, { organizeImportsSkipDestructiveCodeActions: true });
 
 	t.is(formattedCode, code);
 });
