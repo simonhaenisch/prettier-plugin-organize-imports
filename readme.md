@@ -10,44 +10,71 @@ A plugin that makes Prettier organize your imports (i. e. sorts, combines and re
 
 - 👌 Dependency-free (just peer-dependencies you probably already have).
 - 💪 Supports `.js`, `.jsx`, `.ts`, `.tsx` and `.vue` files.
-- 🚀 Zero config.
 - 🤓 No more weird diffs or annoying merge conflicts in PRs caused by import statements.
 - 🤯 If your editor supports auto-imports, you'll stop thinking about your imports so much that you won't even care about their order anymore.
 
 **Caveat**
 
-This plugin inherits, extends and overrides the built-in Prettier parsers for `babel`, `babel-ts`, `typescript` and `vue`, i. e., it's incompatible with other plugins that do the same... so only the last loaded plugin that exports one of those parsers will function.
+This plugin inherits, extends, and overrides the built-in Prettier parsers for `babel`, `babel-ts`, `typescript` and `vue`. This means that it is incompatible with other plugins that do the same; only the last loaded plugin that exports one of those parsers will function.
 
 ## Installation
 
+### Install the Dependency From npm
+
 ```sh
+# If you use npm:
 npm install --save-dev prettier-plugin-organize-imports
+
+# If you use yarn:
+yarn add --dev prettier-plugin-organize-imports
+
+# if you use pnpm:
+pnpm add --save-dev prettier-plugin-organize-imports
 ```
 
-_`prettier` and `typescript` are peer dependencies, so make sure you have those installed in your project._
+Running one of these commands will add `prettier-plugin-organize-imports` to the `devDependencies` section of your project's `package.json` file and download the corresponding files.
+
+Note that `prettier` and `typescript` are peer dependencies, so make sure you also have those installed in your project.
+
+### Add the Plugin to Your Prettier Configuration
+
+If you do not already have [a Prettier configuration file](https://prettier.io/docs/en/configuration.html), create a file called `prettier.config.mjs` at the root of your project. (While Prettier will work with many different configuration file names, this is the file name that you should choose for modern projects.)
+
+Inside the Prettier configuration, you need to include `prettier-plugin-organize-imports` inside of the `plugins` array. In other words, your configuration file should look something like this:
+
+```js
+// This is the configuration file for Prettier, the auto-formatter:
+// https://prettier.io/docs/en/configuration.html
+
+/** @type {import("prettier").Config} */
+const config = {
+  plugins: ["prettier-plugin-organize-imports"],
+};
+
+export default config;
+```
+
+Note that previous versions of this plugin would just work without having you to add anything to the Prettier configuration, but Prettier 3.0 removed the feature called "[plugin search](https://github.com/prettier/prettier/pull/14759)" that enabled this functionality.
 
 ## Usage
 
-The plugin will be loaded by Prettier automatically. No configuration needed.
+Once the plugin is loaded (by specifying it in your Prettier configuration file), it will automatically organize your imports every time that Prettier is run.
 
-Files containing the substring `// organize-imports-ignore` or `// tslint:disable:ordered-imports` are skipped.
+However, files containing the substring `// organize-imports-ignore` or `// tslint:disable:ordered-imports` are skipped.
 
-If you don't want destructive code actions (like removing unused imports), you can enable the option `organizeImportsSkipDestructiveCodeActions` via your Prettier config.
+### ESLint
 
-```js
-// prettierrc.js
+[ESLint](https://eslint.org/) is the most popular JavaScript/TypeScript linter.
 
-module.exports = {
-  // ...
-  organizeImportsSkipDestructiveCodeActions: true,
-};
-```
+If you are setting up Prettier with ESLint for the first time, see the ["Integrating with Linters"](https://prettier.io/docs/en/integrating-with-linters.html) section in the Prettier docs.
 
-**Notes:**
+This plugin will work out of the box with ESLint, meaning that if you already have Prettier working alongside ESLint, then adding this plugin to your Prettier config won't break anything.
 
-- Automatic plugin discovery is not supported with some package managers (e. g. [Yarn 2](https://github.com/prettier/prettier/issues/8474)). Check the [Prettier documentation](https://prettier.io/docs/en/plugins.html) for alternatives to manually load plugins in that case.
-- For compatibility with [ESLint](https://eslint.org/) or other linters, see ["Integrating with Linters"](https://prettier.io/docs/en/integrating-with-linters.html) in the Prettier docs. You should have any import order rules/plugins disabled.
-- React users: depending on your configuration, if you need the `React` import to stay even if it's "unused" (i.e. only needed for the JSX factory), make sure to have the `jsx` option set to `react` in your `tsconfig.json`. For more details [click here](https://www.typescriptlang.org/docs/handbook/jsx.html#basic-usage).
+With that said, note that there are some ESLint rules that require you to organize your import statements in a certain way. If your ESLint configuration already contains these rules, then make sure that you disable them if you decide to adopt this plugin. (Your CI pipeline should validate that all files are formatted correctly with something like `npx prettier --loglevel warn --check .` in addition to validating that all files pass ESLint.)
+
+### React
+
+Depending on your configuration, if you need the `React` import to stay even if it's "unused" (i.e. only needed for the JSX factory), make sure to have the `jsx` option set to `react` in your `tsconfig.json`. For more details, [see the TypeScript handbook](https://www.typescriptlang.org/docs/handbook/jsx.html#basic-usage).
 
 ### Vue.js
 
@@ -59,9 +86,24 @@ npm i --save-dev @volar/vue-typescript
 
 If you're using Vue.js with Pug templates, you'll also need to install `@volar/vue-language-plugin-pug` as a dev dependency, and configure it in `vueCompilerOptions` (see [usage](https://www.npmjs.com/package/@volar/vue-language-plugin-pug)).
 
-### Debug Logs
+## Debug Logs
 
 If something doesn't work, you can try to prefix your command with `DEBUG=true` which will enable this plugin to print some logs.
+
+## Configuration
+
+If you don't want destructive code actions (like removing unused imports), you can enable the option `organizeImportsSkipDestructiveCodeActions` via your Prettier config.
+
+```js
+// This is the configuration file for Prettier, the auto-formatter:
+// https://prettier.io/docs/en/configuration.html
+
+/** @type {import("prettier").Config} */
+const config = {
+  plugins: ["prettier-plugin-organize-imports"],
+  organizeImportsSkipDestructiveCodeActions: true,
+};
+```
 
 ## Rationale/Disclaimer
 
