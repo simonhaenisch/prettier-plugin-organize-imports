@@ -92,7 +92,11 @@ If something doesn't work, you can try to prefix your command with `DEBUG=true` 
 
 ## Configuration
 
-If you don't want destructive code actions (like removing unused imports), you can enable the option `organizeImportsSkipDestructiveCodeActions` via your Prettier config.
+This plugin has one configuration option that is added as a root property in the Prettier config.
+
+### `organizeImportsSkipDestructiveCodeActions`
+
+If you don't want destructive code actions (like removing unused imports), you can enable the `organizeImportsSkipDestructiveCodeActions` option via your Prettier config. For example:
 
 ```js
 // This is the configuration file for Prettier, the auto-formatter:
