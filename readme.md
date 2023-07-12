@@ -28,7 +28,7 @@ npm install --save-dev prettier-plugin-organize-imports
 # If you use yarn:
 yarn add --dev prettier-plugin-organize-imports
 
-# if you use pnpm:
+# If you use pnpm:
 pnpm add --save-dev prettier-plugin-organize-imports
 ```
 
