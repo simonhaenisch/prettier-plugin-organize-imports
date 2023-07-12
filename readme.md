@@ -96,7 +96,7 @@ This plugin has one configuration option that is added as a root property in the
 
 ### `organizeImportsSkipDestructiveCodeActions`
 
-If you don't want destructive code actions (like removing unused imports), you can enable the `organizeImportsSkipDestructiveCodeActions` option via your Prettier config. For example:
+If you don't want destructive code actions (like removing unused imports), you can enable the `organizeImportsSkipDestructiveCodeActions` option in your Prettier config. For example:
 
 ```js
 // This is the configuration file for Prettier, the auto-formatter:
@@ -107,6 +107,8 @@ const config = {
   plugins: ["prettier-plugin-organize-imports"],
   organizeImportsSkipDestructiveCodeActions: true,
 };
+
+export default config;
 ```
 
 ## Rationale/Disclaimer
