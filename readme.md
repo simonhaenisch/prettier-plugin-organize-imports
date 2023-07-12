@@ -54,7 +54,7 @@ const config = {
 export default config;
 ```
 
-Note that previous versions of this plugin would just work without having you to add anything to the Prettier configuration, but Prettier 3.0 removed the feature called "[plugin search](https://github.com/prettier/prettier/pull/14759)" that enabled this functionality.
+Note that previous versions of this plugin would just work without having you to add anything to the Prettier configuration, but Prettier 3.0 [removed the feature called "plugin search"](https://github.com/prettier/prettier/pull/14759) that enabled this functionality.
 
 ## Usage
 
