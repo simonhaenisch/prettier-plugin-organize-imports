@@ -86,7 +86,7 @@ npm i --save-dev @volar/vue-typescript
 
 If you're using Vue.js with Pug templates, you'll also need to install `@volar/vue-language-plugin-pug` as a dev dependency, and configure it in `vueCompilerOptions` (see [usage](https://www.npmjs.com/package/@volar/vue-language-plugin-pug)).
 
-## Debug Logs
+### Debug Logs
 
 If something doesn't work, you can try to prefix your command with `DEBUG=true` which will enable this plugin to print some logs.
 
