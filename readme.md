@@ -24,9 +24,21 @@ This plugin inherits, extends, and then overrides the built-in Prettier parsers 
 npm install --save-dev prettier-plugin-organize-imports
 ```
 
-Note that _`prettier` and `typescript` are peer dependencies, so make sure you have those installed in your project._
+_Note that `prettier` and `typescript` are peer dependencies, so make sure you have those installed in your project._
 
 ## Usage
+
+### Prettier 3
+
+Automatic plugin discovery [has been removed](https://github.com/prettier/prettier/pull/14759). Thus you need to configure Prettier to use the plugin according to the [Plugins docs](https://prettier.io/docs/en/plugins.html), for example by adding it to the `plugins` config option:
+
+```json
+{
+  "plugins": ["prettier-plugin-organize-imports"]
+}
+```
+
+### Prettier 2
 
 The plugin will be loaded by Prettier automatically. No configuration needed.
 
@@ -77,6 +89,8 @@ If something doesn't work, you can try to prefix your `prettier` command with `D
 This plugin acts outside of [Prettier's scope](https://prettier.io/docs/en/rationale#what-prettier-is-_not_-concerned-about) because _"Prettier only prints code. It does not transform it."_, and technically sorting is a code transformation because it changes the AST (this plugin even removes code, i. e. unused imports). In my opinion however, the import statements are not _really_ part of the code, they are merely directives that instruct the module system where to find the code (only true as long as your imports are side-effects free regarding the global scope, i. e. import order doesn't matter), comparable with `using` directives in C# or `#include` preprocessing directives in C. Therefore the practical benefits outweigh sticking with the philosophy in this case.
 
 ## Changelog
+
+Version `3.2.3` updates the readme with instructions for Prettier 3.
 
 Version `3.2.2` fixes a performance regression introduced in `3.2.0`.
 
