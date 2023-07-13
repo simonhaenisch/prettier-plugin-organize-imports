@@ -30,7 +30,7 @@ _Note that `prettier` and `typescript` are peer dependencies, so make sure you h
 
 ### Prettier 3
 
-Automatic plugin discovery [has been removed](https://github.com/prettier/prettier/pull/14759). Thus you need to configure Prettier to use the plugin according to the [Plugins docs](https://prettier.io/docs/en/plugins.html), for example by adding it to the `plugins` config option:
+Automatic plugin discovery [has been removed](https://prettier.io/blog/2023/07/05/3.0.0.html#plugin-search-feature-has-been-removed-14759httpsgithubcomprettierprettierpull14759-by-fiskerhttpsgithubcomfisker). Thus you need to configure Prettier to use the plugin according to the [Plugins docs](https://prettier.io/docs/en/plugins.html), for example by adding it to the `plugins` config option:
 
 ```json
 {
