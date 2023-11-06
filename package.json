@@ -38,12 +38,12 @@
     }
   },
   "devDependencies": {
-    "@types/node": "18.11.9",
+    "@types/node": "20.8.10",
     "@volar/vue-language-plugin-pug": "1.0.9",
     "@volar/vue-typescript": "1.0.9",
     "ava": "3.15.0",
-    "prettier": "3.0.0",
-    "typescript": "5.1.6"
+    "prettier": "3.0.3",
+    "typescript": "5.2.2"
   },
   "prettier": {
     "printWidth": 120,
