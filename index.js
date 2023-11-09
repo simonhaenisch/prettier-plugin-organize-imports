@@ -19,6 +19,15 @@ const organizeImports = (code, options) => {
 		return code;
 	}
 
+	const isRange =
+		Boolean(options.originalText) ||
+		options.rangeStart !== 0 ||
+		(options.rangeEnd !== Infinity && options.rangeEnd !== code.length);
+
+	if (isRange) {
+		return code; // processing a range doesn't make sense
+	}
+
 	try {
 		return organize(code, options);
 	} catch (error) {

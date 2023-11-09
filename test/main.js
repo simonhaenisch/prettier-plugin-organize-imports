@@ -70,6 +70,16 @@ test(
 	{ transformer: (res) => res.split('\n')[1] },
 );
 
+test('skips when formatting a range', async (t) => {
+	const code = 'import { foo } from "./bar";';
+
+	const formattedCode1 = await prettify(code, { rangeEnd: 10 });
+	const formattedCode2 = await prettify(code, { rangeStart: 10 });
+
+	t.is(formattedCode1, code);
+	t.is(formattedCode2, code);
+});
+
 test('does not remove unused imports with `organizeImportsSkipDestructiveCodeActions` enabled', async (t) => {
 	const code = `import { foo } from "./bar";
 `;
