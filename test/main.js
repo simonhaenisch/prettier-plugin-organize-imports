@@ -70,23 +70,14 @@ test(
 	{ transformer: (res) => res.split('\n')[1] },
 );
 
-// In previous version, this test would fail because rangeEnd would cause the plugin to see the import as unused and remove it
-test('formats imports but does not remove them when rangeEnd is passed', async (t) => {
-	const code = `
-		import { foo, bar } from "foobar"
+test('skips when formatting a range', async (t) => {
+	const code = 'import { foo } from "./bar";';
 
-		export const foobar = foo + bar
-	`;
+	const formattedCode1 = await prettify(code, { rangeEnd: 10 });
+	const formattedCode2 = await prettify(code, { rangeStart: 10 });
 
-	const expectedFormattedCode = `
-		import { bar, foo } from "foobar";
-
-		export const foobar = foo + bar
-	`;
-
-	const formattedCode = await prettify(code, { rangeEnd: 10 });
-
-	t.is(formattedCode, expectedFormattedCode);
+	t.is(formattedCode1, code);
+	t.is(formattedCode2, code);
 });
 
 test('does not remove unused imports with `organizeImportsSkipDestructiveCodeActions` enabled', async (t) => {

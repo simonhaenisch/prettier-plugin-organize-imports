@@ -19,10 +19,13 @@ const organizeImports = (code, options) => {
 		return code;
 	}
 
-	// If rangeEnd is passed, the import might be considered unused if isn't contained in the range.
-	// Don't remove imports if rangeEnd is passed.
-	if (code.length !== options.rangeEnd) {
-		options.organizeImportsSkipDestructiveCodeActions = true;
+	const isRange =
+		Boolean(options.originalText) ||
+		options.rangeStart !== 0 ||
+		(options.rangeEnd !== Infinity && options.rangeEnd !== code.length);
+
+	if (isRange) {
+		return code; // processing a range doesn't make sense
 	}
 
 	try {
