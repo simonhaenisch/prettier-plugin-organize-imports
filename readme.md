@@ -90,6 +90,8 @@ This plugin acts outside of [Prettier's scope](https://prettier.io/docs/en/ratio
 
 ## Changelog
 
+Version `3.2.4` implements a fix to skip when formatting ranges (i.e. if the plugin is requested to format a range, it doesn't do anything because it would lack the full file context).
+
 Version `3.2.3` updates the readme with instructions for Prettier 3.
 
 Version `3.2.2` fixes a performance regression introduced in `3.2.0`.
