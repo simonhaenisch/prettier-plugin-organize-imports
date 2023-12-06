@@ -1,4 +1,4 @@
-![Tests](https://github.com/simonhaenisch/prettier-plugin-organize-imports/workflows/Tests/badge.svg)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/simonhaenisch/prettier-plugin-organize-imports/test.yml?label=CI)](https://github.com/simonhaenisch/prettier-plugin-organize-imports/actions?query=branch%3Amaster)
 
 # Prettier Plugin: Organize Imports
 
