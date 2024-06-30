@@ -5,5 +5,5 @@
 		"checkJs": true,
 		"strict": true
 	},
-	"vueCompilerOptions": { "plugins": ["@volar/vue-language-plugin-pug"] }
+	"vueCompilerOptions": { "plugins": ["@vue/language-plugin-pug"] }
 }
