@@ -75,7 +75,7 @@ Depending on your configuration, if you need the `React` import to stay even if 
 Make sure that you have the optional peer dependency `vue-tsc` installed.
 
 ```
-npm i --save-dev vue-tsc
+npm install --save-dev vue-tsc
 ```
 
 If you're using Vue.js with Pug templates, you'll also need to install `@vue/language-plugin-pug` as a dev dependency, and configure it in `vueCompilerOptions` (see [usage](https://www.npmjs.com/package/@vue/language-plugin-pug)).
