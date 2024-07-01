@@ -24,11 +24,15 @@
   "repository": "simonhaenisch/prettier-plugin-organize-imports",
   "homepage": "https://github.com/simonhaenisch/prettier-plugin-organize-imports#readme",
   "peerDependencies": {
+    "@vue/language-plugin-pug": "^2.0.24",
     "prettier": ">=2.0",
     "typescript": ">=2.9",
-    "vue-tsc": ">=2.0.24"
+    "vue-tsc": "^2.0.24"
   },
   "peerDependenciesMeta": {
+    "@vue/language-plugin-pug": {
+      "optional": true
+    },
     "vue-tsc": {
       "optional": true
     }
