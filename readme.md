@@ -72,13 +72,13 @@ Depending on your configuration, if you need the `React` import to stay even if 
 
 ### Vue.js
 
-Make sure that you have the optional peer dependency `@volar/vue-typescript` installed.
+Make sure that you have the optional peer dependency `vue-tsc` installed.
 
 ```
-npm i --save-dev @volar/vue-typescript
+npm install --save-dev vue-tsc
 ```
 
-If you're using Vue.js with Pug templates, you'll also need to install `@volar/vue-language-plugin-pug` as a dev dependency, and configure it in `vueCompilerOptions` (see [usage](https://www.npmjs.com/package/@volar/vue-language-plugin-pug)).
+If you're using Vue.js with Pug templates, you'll also need to install `@vue/language-plugin-pug` as a dev dependency, and configure it in `vueCompilerOptions` (see [usage](https://www.npmjs.com/package/@vue/language-plugin-pug)).
 
 ## Debug Logs
 
