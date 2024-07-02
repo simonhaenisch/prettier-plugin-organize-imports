@@ -12,6 +12,7 @@
   "main": "index.js",
   "scripts": {
     "test": "ava --verbose",
+    "check-types": "tsc",
     "preversion": "npm test"
   },
   "files": [

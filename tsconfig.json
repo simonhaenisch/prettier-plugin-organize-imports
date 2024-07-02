@@ -3,7 +3,9 @@
 		"module": "commonjs",
 		"target": "es2015",
 		"checkJs": true,
-		"strict": true
+		"strict": true,
+		"skipLibCheck": true,
+		"noEmit": true
 	},
 	"vueCompilerOptions": { "plugins": ["@vue/language-plugin-pug"] }
 }

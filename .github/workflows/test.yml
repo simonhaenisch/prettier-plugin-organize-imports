@@ -20,4 +20,5 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - run: npm install
+      - run: npm check-types
       - run: npm test

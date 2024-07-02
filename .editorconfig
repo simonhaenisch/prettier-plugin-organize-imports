@@ -12,6 +12,9 @@ trim_trailing_whitespace = true
 [package.json]
 indent_style = space
 
+[*.yml]
+indent_style = space
+
 [*.md]
 indent_style = space
 trim_trailing_whitespace = false

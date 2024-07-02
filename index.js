@@ -1,9 +1,12 @@
 /**
  * @todo change these to their new locations (`prettier/plugins/<parser>`) with
- * the next major release.
+ * the next major release. (requires dropping Prettier 2.x support)
  */
+// @ts-expect-error
 const { parsers: babelParsers } = require('prettier/parser-babel');
+// @ts-expect-error
 const { parsers: htmlParsers } = require('prettier/parser-html');
+// @ts-expect-error
 const { parsers: typescriptParsers } = require('prettier/parser-typescript');
 
 const { organize } = require('./lib/organize');
