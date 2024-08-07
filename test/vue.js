@@ -29,6 +29,33 @@ test('works with Vue setup scripts', async (t) => {
 	t.is(formattedCode.split('\n')[1], `import { defineComponent } from "vue";`);
 });
 
+test('works with Vue setup scripts and script exports', async (t) => {
+	const code = `<script lang="ts">
+import type { InjectionKey, Ref } from "vue";
+
+export interface TestProps {
+  test?: string;
+}
+
+export const INJECTION_KEY_TEST: InjectionKey<Ref<string[]>> = Symbol("test");
+</script>
+
+<script setup lang="ts">
+import { provide, ref } from "vue";
+
+const props = withDefaults(defineProps<TestProps>(), {});
+
+const test2: Ref<string[]> = ref([]);
+
+provide(INJECTION_KEY_TEST, test2);
+</script>
+`;
+
+	const formattedCode = await prettify(code, { filepath: 'file.vue' });
+
+	t.is(formattedCode, code);
+});
+
 test('preserves new lines and comments in Vue files', async (t) => {
 	const code = `<script lang="ts">
 import { defineComponent, ref } from "vue";
