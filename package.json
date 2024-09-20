@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@types/node": "20.14.9",
-    "@vue/language-plugin-pug": "2.0.24",
+    "@vue/language-plugin-pug": "2.1.6",
     "ava": "6.1.3",
     "prettier": "3.3.2",
     "typescript": "5.5.2",
