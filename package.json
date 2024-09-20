@@ -27,7 +27,7 @@
   "peerDependencies": {
     "prettier": ">=2.0",
     "typescript": ">=2.9",
-    "vue-tsc": "^2.0.24"
+    "vue-tsc": "^2.1.0"
   },
   "peerDependenciesMeta": {
     "vue-tsc": {
@@ -36,11 +36,11 @@
   },
   "devDependencies": {
     "@types/node": "20.14.9",
-    "@vue/language-plugin-pug": "2.0.24",
+    "@vue/language-plugin-pug": "2.1.6",
     "ava": "6.1.3",
     "prettier": "3.3.2",
     "typescript": "5.5.2",
-    "vue-tsc": "2.0.24"
+    "vue-tsc": "^2.1.6"
   },
   "prettier": {
     "printWidth": 120,
