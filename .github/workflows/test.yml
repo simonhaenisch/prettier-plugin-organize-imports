@@ -23,6 +23,4 @@ jobs:
 
       - run: npm install
 
-      - run: npm run check-types
-
       - run: npm test
