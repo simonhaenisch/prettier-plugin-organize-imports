@@ -67,6 +67,42 @@ for (const macro of macros) {
 		'import { foo, bar } from "foobar";',
 		{ transformer: (res) => res.split('\n')[1] },
 	);
+	test(
+		'leaves commented imports intact',
+		macro,
+		`
+			// import { foo, bar } from "foobar"
+
+			export const foobar = foo + bar
+		`,
+		'// import { foo, bar } from "foobar"',
+	);
+	test(
+		'leaves comments in borders of multiline imports intact',
+		macro,
+		`
+import {
+	// DataGrid,
+	GridCellParams,
+	GridColDef,
+	GridLinkOperator,
+	GridRenderCellParams,
+	// plPL,
+} from "@mui/x-data-grid";
+
+DataGrid; GridCellParams; GridColDef; GridLinkOperator; GridRenderCellParams; plPL;
+		`,
+		`import {
+  // DataGrid,
+  GridCellParams,
+  GridColDef,
+  GridLinkOperator,
+  GridRenderCellParams,
+  // plPL,
+} from "@mui/x-data-grid";`
+		,
+		{ transformer: (res) => res.split('\n').slice(0, 8).join('\n') },
+	);
 }
 
 test('skips when formatting a range', async (t) => {
