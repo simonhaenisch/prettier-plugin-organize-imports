@@ -26,7 +26,7 @@
   "peerDependencies": {
     "prettier": ">=2.0",
     "typescript": ">=2.9",
-    "vue-tsc": "^2.1.0"
+    "vue-tsc": "^2.1.0 || ^3.0.0"
   },
   "peerDependenciesMeta": {
     "vue-tsc": {
