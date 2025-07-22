@@ -70,6 +70,26 @@ const plugin = {
 			category: 'OrganizeImports',
 			description: 'Skip destructive code actions like removing unused imports.',
 		},
+		organizeImportsMode: {
+			type: 'choice',
+			default: 'All',
+			category: 'OrganizeImports',
+			description: 'Mode for organizing imports',
+			choices: [
+				{
+					value: 'All',
+					description: 'Sort, combine and remove unused imports',
+				},
+				{
+					value: 'SortAndCombine',
+					description: 'Only sort and combine imports',
+				},
+				{
+					value: 'RemoveUnused',
+					description: 'Only remove unused imports',
+				},
+			],
+		},
 	},
 	parsers: {
 		babel: withOrganizeImportsPreprocess(babelParsers.babel),
