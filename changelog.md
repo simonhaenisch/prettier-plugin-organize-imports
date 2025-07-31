@@ -1,3 +1,5 @@
+Version `4.2.0` switches from using `vue-tsc`'s deprecated `resolveVueCompilerOptions` to the new `getDefaultCompilerOptions` instead, which then also allowed bumping the `vue-tsc` peer dependency range to include version 3.
+
 Version `4.1.0` bumps the peer dependency range for `vue-tsc` to `^2.1.0` because there was a breaking change in its API. If you're using Vue support, upgrade both packages simultaneously, e.g. `npm i -D prettier-plugin-organize-imports vue-tsc`.
 
 Version `4.0.0` upgrades/replaces the Volar packages used for Vue support, to use the latest `vue-tsc` package that's part of Volar 2. To migrate, you just have to remove `@volar/vue-typescript` and if you're using it, also `@volar/vue-language-plugin-pug`, and replace it with `vue-tsc` and `@vue/language-plugin-pug` respectively. There are no breaking changes other than this.
