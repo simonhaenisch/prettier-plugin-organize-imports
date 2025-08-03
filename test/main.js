@@ -87,3 +87,40 @@ test('does not remove unused imports with `organizeImportsSkipDestructiveCodeAct
 
 	t.is(formattedCode, code);
 });
+
+test('does not remove unused imports with `organizeImportsMode` set to `SortAndCombine`', async (t) => {
+	const code = `import { foo } from "./bar";
+`;
+
+	const formattedCode = await prettify(code, { organizeImportsMode: 'SortAndCombine' });
+
+	t.is(formattedCode, code);
+});
+
+test('sort and combine with `organizeImportsMode` set to `SortAndCombine`', async (t) => {
+	const code = `
+			import { foo } from "foobar";
+      import { bar, baz } from "foobar";
+
+			const foobar = foo + baz
+		`;
+
+	const expect = 'import { bar, baz, foo } from "foobar";';
+
+	const formattedCode = await prettify(code, { organizeImportsMode: 'SortAndCombine' });
+
+	t.is(formattedCode.split('\n')[0], expect);
+});
+
+test('only remove unused imports with `organizeImportsMode` set to `RemoveUnused`', async (t) => {
+	const code = `
+			import { foo, bar, baz } from "foobar";
+
+			const foobar = foo + baz
+		`;
+	const expect = 'import { foo, baz } from "foobar";';
+
+	const formattedCode = await prettify(code, { organizeImportsMode: 'RemoveUnused' });
+
+	t.is(formattedCode.split('\n')[0], expect);
+});

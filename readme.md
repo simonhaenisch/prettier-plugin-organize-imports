@@ -60,6 +60,22 @@ If you don't want destructive code actions (like removing unused imports), you c
 }
 ```
 
+### Mode
+Use `organizeImportsMode` to determine how import organization works. This is the recommended approach, as TypeScript has deprecated the [skipDestructiveCodeActions](https://github.com/microsoft/TypeScript/blob/main/src/services/types.ts#L746C5-L746C31) option.
+
+Available modes include:
+- `All` - Performs complete import organization: sorting, combining, and removing unused imports
+- `SortAndCombine` - Only sorts and combines imports without removing any
+- `RemoveUnused` - Only removes unused imports without changing their order
+
+The default mode is `All`. For compatibility, if `organizeImportsSkipDestructiveCodeActions` is set to `true`, the mode will be forced to `SortAndCombine`.
+
+```json
+{
+  "organizeImportsMode": 'All'
+}
+```
+
 ## Compatibility
 
 ### ESLint
