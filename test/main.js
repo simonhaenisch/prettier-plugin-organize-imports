@@ -87,3 +87,15 @@ test('does not remove unused imports with `organizeImportsSkipDestructiveCodeAct
 
 	t.is(formattedCode, code);
 });
+
+test('sorts type imports according to the `organizeImportsTypeOrder` option', async (t) => {
+	const code = `import { foo, type baz, bar } from "./foobarbaz";\n\nexport const foobar: baz = foo + bar;\n`;
+
+	const formattedCode1 = await prettify(code, { parser: 'typescript', organizeImportsTypeOrder: 'last' });
+	const formattedCode2 = await prettify(code, { parser: 'typescript', organizeImportsTypeOrder: 'first' });
+	const formattedCode3 = await prettify(code, { parser: 'typescript', organizeImportsTypeOrder: 'inline' });
+
+	t.is(formattedCode1, `import { bar, foo, type baz } from "./foobarbaz";\n\nexport const foobar: baz = foo + bar;\n`);
+	t.is(formattedCode2, `import { type baz, bar, foo } from "./foobarbaz";\n\nexport const foobar: baz = foo + bar;\n`);
+	t.is(formattedCode3, `import { bar, type baz, foo } from "./foobarbaz";\n\nexport const foobar: baz = foo + bar;\n`);
+});

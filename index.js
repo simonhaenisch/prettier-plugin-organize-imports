@@ -70,6 +70,25 @@ const plugin = {
 			category: 'OrganizeImports',
 			description: 'Skip destructive code actions like removing unused imports.',
 		},
+		organizeImportsTypeOrder: {
+			type: 'choice',
+			choices: [
+				{
+					value: 'last',
+					description: 'Places type imports last.',
+				},
+				{
+					value: 'first',
+					description: 'Places type imports first.',
+				},
+				{
+					value: 'inline',
+					description: 'Keeps type imports in place.',
+				},
+			],
+			category: 'OrganizeImports',
+			description: 'How to sort type imports when mixed in an import statement.',
+		},
 	},
 	parsers: {
 		babel: withOrganizeImportsPreprocess(babelParsers.babel),
