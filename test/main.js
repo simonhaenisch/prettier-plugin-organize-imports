@@ -79,6 +79,19 @@ test('skips when formatting a range', async (t) => {
 	t.is(formattedCode2, code);
 });
 
+test('should format when range is entire file', async (t) => {
+	const code = `import { foo, bar } from "./bar";
+
+		export const foobar = foo + bar;`;
+	const expectedImportLine = 'import { bar, foo } from "./bar";';
+
+	const formattedCode1 = await prettify(code, { rangeStart: 0, rangeEnd: code.length });
+	const formattedCode2 = await prettify(code, { originalText: code, rangeStart: 0, rangeEnd: code.length });
+
+	t.is(formattedCode1.split('\n')[0], expectedImportLine);
+	t.is(formattedCode2.split('\n')[0], expectedImportLine);
+});
+
 test('does not remove unused imports with `organizeImportsSkipDestructiveCodeActions` enabled', async (t) => {
 	const code = `import { foo } from "./bar";
 `;
