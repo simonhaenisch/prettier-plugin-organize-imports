@@ -91,6 +91,109 @@ Foo
 	t.is(formattedCode, expected);
 });
 
+test('works with JSX inside Vue files', async (t) => {
+	const code = `<script lang="jsx">
+import { defineComponent, ref } from "vue";
+export default defineComponent({
+  setup() {
+    const count = ref(0);
+    return () => <div>{count.value}</div>;
+  },
+});
+</script>
+`;
+
+	const formattedCode = await prettify(code, { filepath: 'file.vue' });
+
+	t.is(formattedCode, code);
+});
+
+test('removes unused imports in Vue JSX files', async (t) => {
+	const code = `<script lang="jsx">
+import { defineComponent, ref, computed } from "vue";
+export default defineComponent({
+  setup() {
+    const count = ref(0);
+    return () => <div>{count.value}</div>;
+  },
+});
+</script>
+`;
+
+	const expected = `<script lang="jsx">
+import { defineComponent, ref } from "vue";
+export default defineComponent({
+  setup() {
+    const count = ref(0);
+    return () => <div>{count.value}</div>;
+  },
+});
+</script>
+`;
+
+	const formattedCode = await prettify(code, { filepath: 'file.vue' });
+
+	t.is(formattedCode, expected);
+});
+
+test('works with TSX inside Vue files', async (t) => {
+	const code = `<script lang="tsx">
+import { defineComponent, ref } from "vue";
+export default defineComponent({
+  setup() {
+    const count = ref(0);
+    return () => <div>{count.value}</div>;
+  },
+});
+</script>
+`;
+
+	const formattedCode = await prettify(code, { filepath: 'file.vue' });
+
+	t.is(formattedCode, code);
+});
+
+test('removes unused imports in Vue TSX files', async (t) => {
+	const code = `<script lang="tsx">
+import { defineComponent, ref, computed } from "vue";
+export default defineComponent({
+  setup() {
+    const count = ref(0);
+    return () => <div>{count.value}</div>;
+  },
+});
+</script>
+`;
+
+	const expected = `<script lang="tsx">
+import { defineComponent, ref } from "vue";
+export default defineComponent({
+  setup() {
+    const count = ref(0);
+    return () => <div>{count.value}</div>;
+  },
+});
+</script>
+`;
+
+	const formattedCode = await prettify(code, { filepath: 'file.vue' });
+
+	t.is(formattedCode, expected);
+});
+
+test('works with JSX in Vue setup scripts', async (t) => {
+	const code = `<script setup lang="tsx">
+import { ref } from "vue";
+const count = ref(0);
+const render = () => <div>{count.value}</div>;
+</script>
+`;
+
+	const formattedCode = await prettify(code, { filepath: 'file.vue' });
+
+	t.is(formattedCode, code);
+});
+
 test.serial('works with Volar language plugins when not running from the project root', async (t) => {
 	const originalGetCurrentDir = ts.sys.getCurrentDirectory;
 
