@@ -60,6 +60,26 @@ If you don't want destructive code actions (like removing unused imports), you c
 }
 ```
 
+### Type Imports Order
+
+You can configure how type imports are sorted when mixed with regular imports in the same import statement (`"last"`, `"first"` or `"inline"`) via `organizeImportsTypeOrder`. When omitted, TypeScript automatically detects the order per file.
+
+```json
+{
+  "organizeImportsTypeOrder": "inline"
+}
+```
+
+### Case Sensitivity
+
+You can configure whether imports should be sorted case-insensitively (`true`) or case-sensitively (`false`) via `organizeImportsIgnoreCase`. When omitted, TypeScript automatically detects the case sensitivity per file.
+
+```json
+{
+  "organizeImportsIgnoreCase": true
+}
+```
+
 ## Compatibility
 
 ### ESLint

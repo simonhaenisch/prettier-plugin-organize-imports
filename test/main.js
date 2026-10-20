@@ -99,3 +99,13 @@ test('sorts type imports according to the `organizeImportsTypeOrder` option', as
 	t.is(formattedCode2, `import { type baz, bar, foo } from "./foobarbaz";\n\nexport const foobar: baz = foo + bar;\n`);
 	t.is(formattedCode3, `import { bar, type baz, foo } from "./foobarbaz";\n\nexport const foobar: baz = foo + bar;\n`);
 });
+
+test('sorts imports according to the `organizeImportsIgnoreCase` option', async (t) => {
+	const code = `import { Foo, baz, bar } from "./foobarbaz";\n\nexport const foobar = Foo + bar + baz;\n`;
+
+	const formattedCode1 = await prettify(code, { organizeImportsIgnoreCase: true });
+	const formattedCode2 = await prettify(code, { organizeImportsIgnoreCase: false });
+
+	t.is(formattedCode1, `import { bar, baz, Foo } from "./foobarbaz";\n\nexport const foobar = Foo + bar + baz;\n`);
+	t.is(formattedCode2, `import { Foo, bar, baz } from "./foobarbaz";\n\nexport const foobar = Foo + bar + baz;\n`);
+});

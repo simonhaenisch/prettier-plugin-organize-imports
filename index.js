@@ -89,6 +89,11 @@ const plugin = {
 			category: 'OrganizeImports',
 			description: 'How to sort type imports when mixed in an import statement.',
 		},
+		organizeImportsIgnoreCase: {
+			type: 'boolean',
+			category: 'OrganizeImports',
+			description: 'Indicate whether imports should be organized in a case-insensitive manner.',
+		},
 	},
 	parsers: {
 		babel: withOrganizeImportsPreprocess(babelParsers.babel),
